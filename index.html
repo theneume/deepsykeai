@@ -184,6 +184,22 @@
                 width: 100%; /* Single column on small screens */
             }
         }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .action-buttons button {
+            width: calc(50% - 7.5px); /* Two columns */
+            min-width: 180px; /* Ensure buttons don't get too small */
+        }
+        @media (max-width: 640px) {
+            .action-buttons button {
+                width: 100%; /* Single column on small screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -194,6 +210,7 @@
         <div class="form-section">
             <!-- Admin Mode Toggle -->
             <button class="toggle-btn" onclick="toggleAdminMode()">Toggle Admin/Member Mode</button>
+            <button class="toggle-btn" onclick="toggleAdminMode()">For Businesses</button> <!-- New button for businesses -->
 
             <!-- Member Search & Survey Section -->
             <div id="memberModeSection">
@@ -204,118 +221,119 @@
                 </div>
                 <button onclick="performMemberSearch()">Search</button>
 
-                <hr class="my-8 border-gray-700"> <!-- Separator -->
+                <hr class="my-8 border-gray-700" id="surveySeparator"> <!-- Separator -->
 
-                <h2 class="text-xl text-white font-semibold mb-4">Member Survey: Share Your Insights for Personalized Opportunities</h2>
-                <!-- Formspree Integration: Replace YOUR_FORMSPREE_FORM_HASH with your actual hash -->
-                <form id="memberSurveyForm" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_HASH" method="POST">
-                    <div class="form-group">
-                        <label for="memberName">Your Name:</label>
-                        <input type="text" id="memberName" name="name" placeholder="e.g., Jane Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="memberEmail">Your Email:</label>
-                        <input type="email" id="memberEmail" name="email" placeholder="e.g., jane.doe@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="memberCountry">Your Country:</label>
-                        <input type="text" id="memberCountry" name="country" placeholder="e.g., Australia" required>
-                    </div>
+                <div id="memberSurveyContent">
+                    <h2 class="text-xl text-white font-semibold mb-4">Member Survey: Share Your Insights for Personalized Opportunities</h2>
+                    <!-- Formspree Integration: Replace YOUR_FORMSPREE_FORM_HASH with your actual hash -->
+                    <form id="memberSurveyForm" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_HASH" method="POST">
+                        <div class="form-group">
+                            <label for="memberName">Your Name:</label>
+                            <input type="text" id="memberName" name="name" placeholder="e.g., Jane Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberEmail">Your Email:</label>
+                            <input type="email" id="memberEmail" name="email" placeholder="e.g., jane.doe@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberCountry">Your Country:</label>
+                            <input type="text" id="memberCountry" name="country" placeholder="e.g., Australia" required>
+                        </div>
 
-                    <h3 class="text-lg text-white font-semibold mb-4">Instructions: Please choose the option that best describes you for each question.</h3>
+                        <h3 class="text-lg text-white font-semibold mb-4">Instructions: Please choose the option that best describes you for each question.</h3>
 
-                    <div class="survey-question">
-                        <p>1. When starting something new, my main focus is usually on:</p>
-                        <div class="option">
-                            <input type="radio" id="q1a" name="q1_focus" value="SS" required>
-                            <label for="q1a">a) Thinking deeply about the long-term effects and making sure everything is stable and secure. I like to process information thoroughly to avoid problems down the road.</label>
+                        <div class="survey-question">
+                            <p>1. When starting something new, my main focus is usually on:</p>
+                            <div class="option">
+                                <input type="radio" id="q1a" name="q1_focus" value="SS" required>
+                                <label for="q1a">a) Thinking deeply about the long-term effects and making sure everything is stable and secure. I like to process information thoroughly to avoid problems down the road.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1b" name="q1_focus" value="SD">
+                                <label for="q1b">b) Planning the most balanced and effective way to get things done. I aim for practical solutions that keep things running smoothly.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1c" name="q1_focus" value="DS">
+                                <label for="q1c">c) Coming up with lots of fresh ideas and exploring exciting new possibilities. I love to kick off different projects and imagine what could be.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1d" name="q1_focus" value="DD">
+                                <label for="q1d">d) Jumping in and taking quick, firm action to get clear results. I thrive on moving forward and seeing concrete achievements.</label>
+                            </div>
                         </div>
-                        <div class="option">
-                            <input type="radio" id="q1b" name="q1_focus" value="SD">
-                            <label for="q1b">b) Planning the most balanced and effective way to get things done. I aim for practical solutions that keep things running smoothly.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1c" name="q1_focus" value="DS">
-                            <label for="q1c">c) Coming up with lots of fresh ideas and exploring exciting new possibilities. I love to kick off different projects and imagine what could be.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1d" name="q1_focus" value="DD">
-                            <label for="q1d">d) Jumping in and taking quick, firm action to get clear results. I thrive on moving forward and seeing concrete achievements.</label>
-                        </div>
-                    </div>
 
-                    <div class="survey-question">
-                        <p>2. In social situations, I feel most comfortable when:</p>
-                        <div class="option">
-                            <input type="radio" id="q2a" name="q2_social" value="SS" required>
-                            <label for="q2a">a) Having deep, meaningful conversations with a few close people. I prefer real connections over just small talk.</label>
+                        <div class="survey-question">
+                            <p>2. In social situations, I feel most comfortable when:</p>
+                            <div class="option">
+                                <input type="radio" id="q2a" name="q2_social" value="SS" required>
+                                <label for="q2a">a) Having deep, meaningful conversations with a few close people. I prefer real connections over just small talk.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2b" name="q2_social" value="SD">
+                                <label for="q2b">b) Being a friendly and helpful presence, making sure everyone gets along. I enjoy balancing the mood and assisting others.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2c" name="q2_social" value="DS">
+                                <label for="q2c">c) Leading fun, clever conversations and talking about many interesting topics. I love to be playful and get people thinking.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2d" name="q2_social" value="DD">
+                                <label for="q2d">d) Taking charge and guiding the conversation towards a clear point or decision. I naturally like to lead and make an impact.</label>
+                            </div>
                         </div>
-                        <div class="option">
-                            <input type="radio" id="q2b" name="q2_social" value="SD">
-                            <label for="q2b">b) Being a friendly and helpful presence, making sure everyone gets along. I enjoy balancing the mood and assisting others.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2c" name="q2_social" value="DS">
-                            <label for="q2c">c) Leading fun, clever conversations and talking about many interesting topics. I love to be playful and get people thinking.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2d" name="q2_social" value="DD">
-                            <label for="q2d">d) Taking charge and guiding the conversation towards a clear point or decision. I naturally like to lead and make an impact.</label>
-                        </div>
-                    </div>
 
-                    <div class="survey-question">
-                        <p>3. The quality I find most appealing in others is their:</p>
-                        <div class="option">
-                            <input type="radio" id="q3a" name="q3_appealing_quality" value="SS" required>
-                            <label for="q3a">a) Genuineness, deep understanding, and ability to make me feel secure. I value true connections and profound insights.</label>
+                        <div class="survey-question">
+                            <p>3. The quality I find most appealing in others is their:</p>
+                            <div class="option">
+                                <input type="radio" id="q3a" name="q3_appealing_quality" value="SS" required>
+                                <label for="q3a">a) Genuineness, deep understanding, and ability to make me feel secure. I value true connections and profound insights.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3b" name="q3_appealing_quality" value="SD">
+                                <label for="q3b">b) Balanced approach, practical mindset, and ability to plan well. I appreciate people who are dependable and can handle situations effectively.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3c" name="q3_appealing_quality" value="DS" required>
+                                <label for="q3c">c) Quick wit, curiosity, and charming personality. I'm drawn to people who make me think and are engaging.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3d" name="q3_appealing_quality" value="DD">
+                                <label for="q3d">d) Confidence, strong drive, and straightforwardness. I admire those who are clear, strong, and focused on getting results.</label>
+                            </div>
                         </div>
-                        <div class="option">
-                            <input type="radio" id="q3b" name="q3_appealing_quality" value="SD">
-                            <label for="q3b">b) Balanced approach, practical mindset, and ability to plan well. I appreciate people who are dependable and can handle situations effectively.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3c" name="q3_appealing_quality" value="DS">
-                            <label for="q3c">c) Quick wit, curiosity, and charming personality. I'm drawn to people who make me think and are engaging.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3d" name="q3_appealing_quality" value="DD">
-                            <label for="q3d">d) Confidence, strong drive, and straightforwardness. I admire those who are clear, strong, and focused on getting results.</label>
-                        </div>
-                    </div>
 
-                    <div class="survey-question">
-                        <p>4. My biggest personal challenge often involves:</p>
-                        <div class="option">
-                            <input type="radio" id="q4a" name="q4_challenge" value="SS" required>
-                            <label for="q4a">a) Thinking too much, worrying, or dealing with anxiety. My mind can get stuck in negative loops, making it hard to feel free.</label>
+                        <div class="survey-question">
+                            <p>4. My biggest personal challenge often involves:</p>
+                            <div class="option">
+                                <input type="radio" id="q4a" name="q4_challenge" value="SS" required>
+                                <label for="q4a">a) Thinking too much, worrying, or dealing with anxiety. My mind can get stuck in negative loops, making it hard to feel free.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4b" name="q4_challenge" value="SD">
+                                <label for="q4b">b) Feeling disappointed when things don't go as planned, or putting others' needs before my own. I might neglect myself while trying to keep things balanced or help.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4c" name="q4_challenge" value="DS" required>
+                                <label for="q4c">c) Starting many projects but finding it hard to finish them, or feeling scattered. My love for new things can make it tough to stick with one thing.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4d" name="q4_challenge" value="DD">
+                                <label for="q4d">d) Being seen as stubborn, impatient, or too focused on outcomes. My directness and drive can sometimes seem unyielding.</label>
+                            </div>
                         </div>
-                        <div class="option">
-                            <input type="radio" id="q4b" name="q4_challenge" value="SD">
-                            <label for="q4b">b) Feeling disappointed when things don't go as planned, or putting others' needs before my own. I might neglect myself while trying to keep things balanced or help.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4c" name="q4_challenge" value="DS">
-                            <label for="q4c">c) Starting many projects but finding it hard to finish them, or feeling scattered. My love for new things can make it tough to stick with one thing.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4d" name="q4_challenge" value="DD">
-                            <label for="q4d">d) Being seen as stubborn, impatient, or too focused on outcomes. My directness and drive can sometimes seem unyielding.</label>
-                        </div>
-                    </div>
 
-                    <div class="survey-question">
-                        <p>5. When I think about the past, I usually:</p>
-                        <div class="option">
-                            <input type="radio" id="q5a" name="q5_past" value="SS" required>
-                            <label for="q5a">a) Look for deep lessons and understand how events connect to my inner self. I search for profound meaning and how things fit together over time.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5b" name="q5_past" value="SD">
-                            <label for="q5b">b) Use past experiences to shape my future plans, then move on. I use what I've learned in a practical way to improve for tomorrow.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5c" name="q5_past" value="DS">
+                        <div class="survey-question">
+                            <p>5. When I think about the past, I usually:</p>
+                            <div class="option">
+                                <input type="radio" id="q5a" name="q5_past" value="SS" required>
+                                <label for="q5a">a) Look for deep lessons and understand how events connect to my inner self. I search for profound meaning and how things fit together over time.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q5b" name="q5_past" value="SD">
+                                <label for="q5b">b) Use past experiences to shape my future plans, then move on. I use what I've learned in a practical way to improve for tomorrow.</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q5c" name="q5_past" value="DS" required>
                             <label for="q5c">c) Explore new ideas or different ways of looking at past events. I'm curious about fresh interpretations and possibilities.</label>
                         </div>
                         <div class="option">
@@ -335,7 +353,7 @@
                             <label for="q6b">b) Creating a balanced plan and adjusting it practically as things change. I aim for the most effective and smooth progress.</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q6c" name="q6_goal_reaching" value="DS">
+                            <input type="radio" id="q6c" name="q6_goal_reaching" value="DS" required>
                             <label for="q6c">c) Starting many different ideas and exploring various paths, even if some don't get finished. I'm excited by the thrill of new beginnings.</label>
                         </div>
                         <div class="option">
@@ -355,7 +373,7 @@
                             <label for="q7b">b) Achieving balance, smart advantages, and reliable partnerships. I desire harmony and effective teamwork.</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7c" name="q7_life_desire" value="DS">
+                            <input type="radio" id="q7c" name="q7_life_desire" value="DS" required>
                             <label for="q7c">c) Constant new experiences, exciting ideas, and being recognized socially. I thrive on novelty and being seen as creative.</label>
                         </div>
                         <div class="option">
@@ -528,352 +546,4 @@
                         <p>16. How do you typically react when you're under a lot of pressure or have a tight deadline?</p>
                         <div class="option">
                             <input type="radio" id="q16a" name="q16_pressure" value="SS" required>
-                            <label for="q16a">a) I tend to step back and think things through on my own, needing quiet time to process deeply and make sure I don't miss important details before acting. My focus is on being thorough and stable.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q16b" name="q16_pressure" value="SD">
-                            <label for="q16b">b) I become very focused and strategic, calmly looking at the situation to find the most balanced and effective way forward. I thrive on adapting my plans.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q16c" name="q16_pressure" value="DS" required>
-                            <label for="q16c">c) I enjoy the challenge, often getting a burst of new ideas and liking the intensity, though I might switch between tasks. The excitement of the pressure can be stimulating.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q16d" name="q16_pressure" value="DD">
-                            <label for="q16d">d) I become intensely driven and determined, focusing completely on the task to push through any difficulties and achieve the result. My willpower is incredibly strong.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>17. When I hear a marketing or sales pitch, my first thought is usually:</p>
-                        <div class="option">
-                            <input type="radio" id="q17a" name="q17_pitch" value="SS" required>
-                            <label for="q17a">a) I'm careful and analytical; I need to understand the long-term benefits and if it feels right ethically before I'd even consider it. I value security and deep satisfaction.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q17b" name="q17_pitch" value="SD">
-                            <label for="q17b">b) I'm practical and evaluate it; I check its real-world value and how it strategically fits with what I need or my goals. I look for balanced solutions and smart advantages.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q17c" name="q17_pitch" value="DS" required>
-                            <label for="q17c">c) I'm curious and playful; I'm drawn to new ideas and clever presentations, often enjoying the mental game more than the actual offer. I appreciate unique features and fresh experiences.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q17d" name="q17_pitch" value="DD">
-                            <label for="q17d">d) I'm direct and focused on results; I quickly decide if it offers clear benefits or immediate solutions; otherwise, I'm not interested. I prioritize efficiency and quick impact.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>18. Regarding new ideas versus old ways, I tend to believe:</p>
-                        <div class="option">
-                            <input type="radio" id="q18a" name="q18_new_vs_old" value="SS" required>
-                            <label for="q18a">a) Old ways hold deep wisdom and provide stability, but real progress comes from thoughtful, meaningful changes, not just quick shifts. I seek continuity and genuine truth.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q18b" name="q18_new_vs_old" value="SD">
-                            <label for="q18b">b) New ideas are important, but they need to be balanced with practical thinking and respect for proven methods to ensure steady growth. I value equilibrium and strong performance.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q18c" name="q18_new_vs_old" value="DS" required>
-                            <label for="q18c">c) New ideas drive everything forward, exploring new frontiers and often playfully ignoring old ways that don't fit anymore. I thrive on novelty and pushing boundaries.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q18d" name="q18_new_vs_old" value="DD">
-                            <label for="q18d">d) Progress is about constantly moving forward and reaching new achievements, and old ways are only useful if they directly help with efficiency and results. I am focused on clear outcomes and making an impact.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>19. When it comes to my passions and the causes I care about, I am most drawn to:</p>
-                        <div class="option">
-                            <input type="radio" id="q19a" name="q19_passions" value="SS" required>
-                            <label for="q19a">a) Seeking profound understanding, supporting the well-being of everyone, or deeply connecting with nature and authentic truths. I seek inner peace and ethical alignment.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q19b" name="q19_passions" value="SD">
-                            <label for="q19b">b) Standing up for fairness and balance, building strong, loyal communities, or smartly working towards practical, impactful change. I am driven by justice and effective action.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q19c" name="q19" value="DS" required>
-                            <label for="q19c">c) Exploring unique intellectual concepts, being creative, or seeking social recognition for innovative ideas. I thrive on mental stimulation and exciting new pursuits.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q19d" name="q19_passions" value="DD">
-                            <label for="q19d">d) Leading impactful projects, overcoming big challenges, or making clear progress for a cause I believe in. I am motivated by achievement and direct results.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>20. My view on politics and world events is mainly:</p>
-                        <div class="option">
-                            <input type="radio" id="q20a" name="q20_politics" value="SS" required>
-                            <label for="q20a">a) I think deeply about them and am often concerned with the underlying issues, seeking profound understanding and long-term harmony. I focus on the unseen truths and the good of all.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q20b" name="q20_politics" value="SD">
-                            <label for="q20b">b) I'm practical and strategic, focused on finding balanced solutions and effective plans that help the most people. I aim for efficient and stable governance.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q20c" name="q20_politics" value="DS" required>
-                            <label for="q20c">c) I'm curious about different viewpoints and new ideas, often enjoying intellectual discussions about global trends and cultural changes. I like exploring the complexities and unique angles.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q20d" name="q20_politics" value="DD">
-                            <label for="q20d">d) I'm direct and action-oriented, focused on strong leadership and clear results to solve global problems and drive progress. I prioritize impact and definite outcomes.</label>
-                        </div>
-                    </div>
-
-                    <button type="submit">Submit Survey & Get Personalized Insights</button>
-                </form>
-            </div>
-
-            <!-- Admin/Business Profile Section (Hidden by default) -->
-            <div id="adminModeSection" class="hidden">
-                <h2 class="text-xl text-white font-semibold mb-4">Submit Business/Practitioner Profile</h2>
-                <form id="businessProfileForm" action="https://formspree.io/f/YOUR_FORMSPREE_ADMIN_HASH" method="POST">
-                    <div class="form-group">
-                        <label for="businessName">Business/Practitioner Name:</label>
-                        <input type="text" id="businessName" name="business_name" placeholder="e.g., 'Zenith Coaching', 'Dr. Anya Sharma'" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="serviceDescription">Service/Offering Description:</label>
-                        <textarea id="serviceDescription" name="service_description" rows="4" placeholder="Describe your service, style, and what you offer." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="block mb-2 text-white">Associated Affinity Zones (Select one or more):</label>
-                        <div class="affinity-checkboxes">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="azSS" name="affinity_zones" value="SS">
-                                <label for="azSS">SS (Grounded Processor)</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="azSD" name="affinity_zones" value="SD">
-                                <label for="azSD">SD (Strategic Navigator)</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="azDS" name="affinity_zones" value="DS">
-                                <label for="azDS">DS (Exploratory Innovator)</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="azDD" name="affinity_zones" value="DD">
-                                <label for="azDD">DD (Dynamic Initiator)</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="specialOffer">Special Offer for DEEPSYKE Members (Optional):</label>
-                        <input type="text" id="specialOffer" name="special_offer" placeholder="e.g., '15% off first consultation', 'Free e-book'">
-                    </div>
-                    <button type="submit">Submit Profile</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="resultsOutput" class="results-area">
-            <!-- Search results or submission confirmations will appear here -->
-            <p class="text-center text-gray-400">Search for opportunities or complete the survey to get your personalized insights.</p>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('memberSurveyForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission to handle via JS
-            submitMemberSurvey();
-        });
-
-        document.getElementById('businessProfileForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission to handle via JS
-            submitBusinessProfile();
-        });
-
-        function toggleAdminMode() {
-            const memberSection = document.getElementById('memberModeSection');
-            const adminSection = document.getElementById('adminModeSection');
-            const toggleBtn = document.querySelector('.toggle-btn');
-            const resultsOutput = document.getElementById('resultsOutput');
-
-            if (memberSection.classList.contains('hidden')) {
-                // Currently in Admin Mode, switch to Member Mode
-                memberSection.classList.remove('hidden');
-                adminSection.classList.add('hidden');
-                toggleBtn.textContent = 'Toggle Admin/Member Mode';
-                resultsOutput.innerHTML = '<p class="text-center text-gray-400">Search for opportunities or complete the survey to get your personalized insights.</p>';
-            } else {
-                // Currently in Member Mode, switch to Admin Mode
-                memberSection.classList.add('hidden');
-                adminSection.classList.remove('hidden');
-                toggleBtn.textContent = 'Switch to Member Mode';
-                resultsOutput.innerHTML = '<p class="text-center text-gray-400">Submit business profiles here.</p>';
-            }
-        }
-
-        function performMemberSearch() {
-            const query = document.getElementById('memberSearchQuery').value;
-            const resultsOutput = document.getElementById('resultsOutput');
-
-            if (!query.trim()) {
-                resultsOutput.innerHTML = '<p class="text-red-400">Please enter a search query.</p>';
-                return;
-            }
-
-            resultsOutput.innerHTML = `<p class="text-blue-300">Searching for opportunities related to "${query}"...</p>`;
-            console.log(`Member search query: "${query}"`);
-
-            // Placeholder for future backend call to Lambda/Gemini
-            setTimeout(() => {
-                resultsOutput.innerHTML = `
-                    <h3 class="text-xl text-white font-semibold mb-3">Personalized Results for "${query}"</h3>
-                    <div class="mb-4">
-                        <p class="text-lg text-blue-300 font-medium">Zenith Coaching</p>
-                        <p class="text-sm text-gray-300">"This sounds like a powerful way to spend a Tuesday morning. Zenith Coaching offers programs that resonate with those who love to push boundaries and explore new horizons. Remember, 'The best fun is had when you're not depressed' - Leonard Cohen."</p>
-                        <p class="text-green-400 mt-2">Special Offer: 15% off your first consultation for DEEPSYKE members!</p>
-                    </div>
-                    <div class="mb-4">
-                        <p class="text-lg text-blue-300 font-medium">"The Art of Not Finishing" - A Workshop Series</p>
-                        <p class="text-sm text-gray-300">"It's not procrastination to not finish a task. Maybe it's just we are too refined for our own good. This workshop series celebrates the exploratory journey, offering tools to find joy in the process, not just the destination."</p>
-                    </div>
-                    <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
-                `;
-                console.log("Placeholder search results displayed.");
-            }, 2000);
-        }
-
-        async function submitMemberSurvey() {
-            const memberName = document.getElementById('memberName').value;
-            const memberEmail = document.getElementById('memberEmail').value;
-            const memberCountry = document.getElementById('memberCountry').value;
-            const resultsOutput = document.getElementById('resultsOutput');
-
-            if (!memberName.trim() || !memberEmail.trim() || !memberCountry.trim()) {
-                resultsOutput.innerHTML = '<p class="text-red-400">Please fill in your Name, Email, and Country.</p>';
-                return;
-            }
-
-            const surveyResponses = {};
-            let allQuestionsAnswered = true;
-            for (let i = 1; i <= 20; i++) { // Assuming 20 questions
-                const selectedOption = document.querySelector(`input[name="q${i}_${getQuestionName(i)}"]:checked`);
-                if (selectedOption) {
-                    surveyResponses[`q${i}_${getQuestionName(i)}`] = selectedOption.value;
-                } else {
-                    allQuestionsAnswered = false;
-                    break;
-                }
-            }
-
-            if (!allQuestionsAnswered) {
-                resultsOutput.innerHTML = '<p class="text-red-400">Please answer all survey questions.</p>';
-                return;
-            }
-
-            resultsOutput.innerHTML = `<p class="text-blue-300">Submitting your survey, ${memberName}. Please wait...</p>`;
-            console.log("Member Survey Submission Data:", {
-                memberName,
-                memberEmail,
-                memberCountry,
-                surveyResponses
-            });
-
-            // --- Formspree Submission ---
-            const form = document.getElementById('memberSurveyForm');
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    resultsOutput.innerHTML = `
-                        <h3 class="text-xl text-white font-semibold mb-3">Survey Submitted!</h3>
-                        <p class="text-green-400">Thank you, ${memberName}! Your responses have been recorded and sent to us. We will process your Affinity Zone and begin personalizing your DEEPSYKE experience.</p>
-                        <p class="text-gray-400 mt-4">Future: Here, you would see your calculated Affinity Zone and initial personalized insights/recommendations.</p>
-                    `;
-                    // Clear form fields after successful submission
-                    form.reset(); // Resets all form fields
-                } else {
-                    const errorData = await response.json();
-                    resultsOutput.innerHTML = `<p class="text-red-400">Error submitting survey: ${errorData.errors ? errorData.errors.map(e => e.message).join(', ') : 'Unknown error'}</p>`;
-                    console.error('Formspree error:', errorData);
-                }
-            } catch (error) {
-                resultsOutput.innerHTML = `<p class="text-red-400">Network error submitting survey. Please try again.</p>`;
-                console.error('Fetch error:', error);
-            }
-            // --- End Formspree Submission ---
-        }
-
-        async function submitBusinessProfile() {
-            const businessName = document.getElementById('businessName').value;
-            const serviceDescription = document.getElementById('serviceDescription').value;
-            const specialOffer = document.getElementById('specialOffer').value;
-            const selectedAffinityZones = Array.from(document.querySelectorAll('#adminModeSection .affinity-checkboxes input[type="checkbox"]:checked'))
-                                                .map(cb => cb.value);
-            const resultsOutput = document.getElementById('resultsOutput');
-
-            if (!businessName.trim() || !serviceDescription.trim() || selectedAffinityZones.length === 0) {
-                resultsOutput.innerHTML = '<p class="text-red-400">Please fill in business name, service description, and select at least one Associated Affinity Zone.</p>';
-                return;
-            }
-
-            resultsOutput.innerHTML = `<p class="text-blue-300">Submitting profile for "${businessName}"...</p>`;
-            console.log("Business Profile Submission Data:", {
-                businessName,
-                serviceDescription,
-                selectedAffinityZones,
-                specialOffer: specialOffer || "N/A"
-            });
-
-            // --- Formspree Submission for Admin ---
-            const form = document.getElementById('businessProfileForm');
-            const formData = new FormData(form);
-            // Add a hidden field to denote admin submission, if Formspree supports it or for your future backend
-            formData.append('submission_type', 'admin_profile');
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    resultsOutput.innerHTML = `
-                        <p class="text-green-400">Profile for "${businessName}" submitted successfully!</p>
-                        <p class="text-gray-300 mt-2">Associated with: ${selectedAffinityZones.join(', ')}</p>
-                    `;
-                    // Clear form fields after successful submission
-                    form.reset();
-                } else {
-                    const errorData = await response.json();
-                    resultsOutput.innerHTML = `<p class="text-red-400">Error submitting profile: ${errorData.errors ? errorData.errors.map(e => e.message).join(', ') : 'Unknown error'}</p>`;
-                    console.error('Formspree error:', errorData);
-                }
-            } catch (error) {
-                resultsOutput.innerHTML = `<p class="text-red-400">Network error submitting profile. Please try again.</p>`;
-                console.error('Fetch error:', error);
-            }
-            // --- End Formspree Submission for Admin ---
-        }
-
-        // Helper function to get consistent name for radio buttons
-        function getQuestionName(qNum) {
-            const names = {
-                1: 'focus', 2: 'social', 3: 'appealing_quality', 4: 'challenge', 5: 'past',
-                6: 'goal_reaching', 7: 'life_desire', 8: 'others_see_you', 9: 'connecting',
-                10: 'communication_response', 11: 'personal_space', 12: 'decision',
-                13: 'free_time', 14: 'upset_response', 15: 'new_info', 16: 'pressure',
-                17: 'pitch', 18: 'new_vs_old', 19: 'passions', 20: 'politics'
-            };
-            return names[qNum] || 'unknown';
-        }
-    </script>
-</body>
-</html>
+                            <label for="q16a">a) I tend to step back and think things through on my own, needing quiet time to process deeply and make sure I don't miss important details before acting. My focus is on being thorough and stable.</lab
