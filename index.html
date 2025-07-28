@@ -39,12 +39,20 @@
             letter-spacing: -0.05em;
             text-shadow: 0 0 15px rgba(173, 216, 230, 0.4); /* Pale blue glow */
         }
-        .logo {
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-svg {
+            width: 80px; /* Adjust size as needed */
+            height: 80px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .logo-text {
             font-size: 1.2em;
             font-weight: 600;
             color: #87ceeb; /* Sky blue */
-            text-align: center;
-            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
@@ -204,7 +212,29 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">DEEPSYKE</div>
+        <div class="logo-container">
+            <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#87ceeb;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b0c4de;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#87ceeb;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <!-- Central "eye" or "insight" point -->
+                <circle cx="50" cy="50" r="15" fill="url(#grad2)"/>
+                <!-- Abstract "layers" or "depth" -->
+                <path d="M50 5C74.8528 5 95 25.1472 95 50C95 74.8528 74.8528 95 50 95C25.1472 95 5 74.8528 5 50C5 25.1472 25.1472 5 50 5Z" stroke="url(#grad1)" stroke-width="3" opacity="0.7"/>
+                <path d="M50 15C69.33 15 85 30.67 85 50C85 69.33 69.33 85 50 85C30.67 85 15 69.33 15 50C15 30.67 30.67 15 50 15Z" stroke="url(#grad2)" stroke-width="2" opacity="0.5"/>
+                <!-- Subtle "search" or "connection" lines -->
+                <line x1="50" y1="50" x2="70" y2="30" stroke="#b0c4de" stroke-width="1" opacity="0.6"/>
+                <line x1="50" y1="50" x2="30" y2="70" stroke="#b0c4de" stroke-width="1" opacity="0.6"/>
+            </svg>
+            <div class="logo-text">DEEPSYKE</div>
+        </div>
         <h1>The Hyper-Personalized Search & Opportunity Engine</h1>
 
         <div class="form-section">
@@ -212,338 +242,4 @@
             <button class="toggle-btn" onclick="toggleAdminMode()">Toggle Admin/Member Mode</button>
             <button class="toggle-btn" onclick="toggleAdminMode()">For Businesses</button> <!-- New button for businesses -->
 
-            <!-- Member Search & Survey Section -->
-            <div id="memberModeSection">
-                <h2 class="text-xl text-white font-semibold mb-4">Search for Personalized Opportunities</h2>
-                <div class="search-bar-group">
-                    <label for="memberSearchQuery">What are you looking for?</label>
-                    <input type="text" id="memberSearchQuery" placeholder="e.g., 'career advice', 'travel ideas', 'new hobbies'">
-                </div>
-                <button onclick="performMemberSearch()">Search</button>
-
-                <hr class="my-8 border-gray-700" id="surveySeparator"> <!-- Separator -->
-
-                <div id="memberSurveyContent">
-                    <h2 class="text-xl text-white font-semibold mb-4">Member Survey: Share Your Insights for Personalized Opportunities</h2>
-                    <!-- Formspree Integration: Replace YOUR_FORMSPREE_FORM_HASH with your actual hash -->
-                    <form id="memberSurveyForm" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_HASH" method="POST">
-                        <div class="form-group">
-                            <label for="memberName">Your Name:</label>
-                            <input type="text" id="memberName" name="name" placeholder="e.g., Jane Doe" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="memberEmail">Your Email:</label>
-                            <input type="email" id="memberEmail" name="email" placeholder="e.g., jane.doe@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="memberCountry">Your Country:</label>
-                            <input type="text" id="memberCountry" name="country" placeholder="e.g., Australia" required>
-                        </div>
-
-                        <h3 class="text-lg text-white font-semibold mb-4">Instructions: Please choose the option that best describes you for each question.</h3>
-
-                        <div class="survey-question">
-                            <p>1. When starting something new, my main focus is usually on:</p>
-                            <div class="option">
-                                <input type="radio" id="q1a" name="q1_focus" value="SS" required>
-                                <label for="q1a">a) Thinking deeply about the long-term effects and making sure everything is stable and secure. I like to process information thoroughly to avoid problems down the road.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q1b" name="q1_focus" value="SD">
-                                <label for="q1b">b) Planning the most balanced and effective way to get things done. I aim for practical solutions that keep things running smoothly.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q1c" name="q1_focus" value="DS">
-                                <label for="q1c">c) Coming up with lots of fresh ideas and exploring exciting new possibilities. I love to kick off different projects and imagine what could be.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q1d" name="q1_focus" value="DD">
-                                <label for="q1d">d) Jumping in and taking quick, firm action to get clear results. I thrive on moving forward and seeing concrete achievements.</label>
-                            </div>
-                        </div>
-
-                        <div class="survey-question">
-                            <p>2. In social situations, I feel most comfortable when:</p>
-                            <div class="option">
-                                <input type="radio" id="q2a" name="q2_social" value="SS" required>
-                                <label for="q2a">a) Having deep, meaningful conversations with a few close people. I prefer real connections over just small talk.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q2b" name="q2_social" value="SD">
-                                <label for="q2b">b) Being a friendly and helpful presence, making sure everyone gets along. I enjoy balancing the mood and assisting others.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q2c" name="q2_social" value="DS">
-                                <label for="q2c">c) Leading fun, clever conversations and talking about many interesting topics. I love to be playful and get people thinking.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q2d" name="q2_social" value="DD">
-                                <label for="q2d">d) Taking charge and guiding the conversation towards a clear point or decision. I naturally like to lead and make an impact.</label>
-                            </div>
-                        </div>
-
-                        <div class="survey-question">
-                            <p>3. The quality I find most appealing in others is their:</p>
-                            <div class="option">
-                                <input type="radio" id="q3a" name="q3_appealing_quality" value="SS" required>
-                                <label for="q3a">a) Genuineness, deep understanding, and ability to make me feel secure. I value true connections and profound insights.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q3b" name="q3_appealing_quality" value="SD">
-                                <label for="q3b">b) Balanced approach, practical mindset, and ability to plan well. I appreciate people who are dependable and can handle situations effectively.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q3c" name="q3_appealing_quality" value="DS" required>
-                                <label for="q3c">c) Quick wit, curiosity, and charming personality. I'm drawn to people who make me think and are engaging.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q3d" name="q3_appealing_quality" value="DD">
-                                <label for="q3d">d) Confidence, strong drive, and straightforwardness. I admire those who are clear, strong, and focused on getting results.</label>
-                            </div>
-                        </div>
-
-                        <div class="survey-question">
-                            <p>4. My biggest personal challenge often involves:</p>
-                            <div class="option">
-                                <input type="radio" id="q4a" name="q4_challenge" value="SS" required>
-                                <label for="q4a">a) Thinking too much, worrying, or dealing with anxiety. My mind can get stuck in negative loops, making it hard to feel free.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q4b" name="q4_challenge" value="SD">
-                                <label for="q4b">b) Feeling disappointed when things don't go as planned, or putting others' needs before my own. I might neglect myself while trying to keep things balanced or help.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q4c" name="q4_challenge" value="DS" required>
-                                <label for="q4c">c) Starting many projects but finding it hard to finish them, or feeling scattered. My love for new things can make it tough to stick with one thing.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q4d" name="q4_challenge" value="DD">
-                                <label for="q4d">d) Being seen as stubborn, impatient, or too focused on outcomes. My directness and drive can sometimes seem unyielding.</label>
-                            </div>
-                        </div>
-
-                        <div class="survey-question">
-                            <p>5. When I think about the past, I usually:</p>
-                            <div class="option">
-                                <input type="radio" id="q5a" name="q5_past" value="SS" required>
-                                <label for="q5a">a) Look for deep lessons and understand how events connect to my inner self. I search for profound meaning and how things fit together over time.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q5b" name="q5_past" value="SD">
-                                <label for="q5b">b) Use past experiences to shape my future plans, then move on. I use what I've learned in a practical way to improve for tomorrow.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q5c" name="q5_past" value="DS" required>
-                            <label for="q5c">c) Explore new ideas or different ways of looking at past events. I'm curious about fresh interpretations and possibilities.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5d" name="q5_past" value="DD">
-                            <label for="q5d">d) Focus on how past successes or failures can push me towards future goals. I see the past as a stepping stone for what's next.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>6. When I set a goal, my usual way of reaching it is:</p>
-                        <div class="option">
-                            <input type="radio" id="q6a" name="q6_goal_reaching" value="SS" required>
-                            <label for="q6a">a) Carefully planning every detail and moving cautiously, making sure it will last. I prioritize stability and careful execution.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q6b" name="q6_goal_reaching" value="SD">
-                            <label for="q6b">b) Creating a balanced plan and adjusting it practically as things change. I aim for the most effective and smooth progress.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q6c" name="q6_goal_reaching" value="DS" required>
-                            <label for="q6c">c) Starting many different ideas and exploring various paths, even if some don't get finished. I'm excited by the thrill of new beginnings.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q6d" name="q6_goal_reaching" value="DD">
-                            <label for="q6d">d) Acting quickly and firmly, relentlessly pushing through challenges to get the job done. I am focused on concrete results and making a strong impact.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>7. What I want most in life can be described as:</p>
-                        <div class="option">
-                            <input type="radio" id="q7a" name="q7_life_desire" value="SS" required>
-                            <label for="q7a">a) A deep sense of security, profound understanding, and inner peace. I seek genuine connection and a solid foundation.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7b" name="q7_life_desire" value="SD">
-                            <label for="q7b">b) Achieving balance, smart advantages, and reliable partnerships. I desire harmony and effective teamwork.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7c" name="q7_life_desire" value="DS" required>
-                            <label for="q7c">c) Constant new experiences, exciting ideas, and being recognized socially. I thrive on novelty and being seen as creative.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7d" name="q7_life_desire" value="DD">
-                            <label for="q7d">d) Immediate, clear results, efficiency, and a feeling of power or accomplishment. I am driven by making a strong impact and clear success.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>8. How do you think others generally see you?</p>
-                        <div class="option">
-                            <input type="radio" id="q8a" name="q8_others_see_you" value="SS" required>
-                            <label for="q8a">a) Calm, thoughtful, and maybe a bit unique or mysterious. I'm often seen as wise or someone with deep insights.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q8b" name="q8_others_see_you" value="SD">
-                            <label for="q8b">b) Charming, balanced, practical, and sometimes a bit dramatic. I'm often seen as a lively person or someone who likes to help.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q8c" name="q8_others_see_you" value="DS" required>
-                            <label for="q8c">c) Clever, energetic, curious, and perhaps sometimes scattered or overly confident. I'm seen as a fun conversationalist and someone who loves new ideas.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q8d" name="q8_others_see_you" value="DD">
-                            <label for="q8d">d) Direct, confident, decisive, and perhaps sometimes stubborn or very serious. I'm often seen as a strong leader or someone who gets things done.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>9. My main way of connecting with others is by:</p>
-                        <div class="option">
-                            <input type="radio" id="q9a" name="q9_connecting" value="SS" required>
-                            <label for="q9a">a) Having deep, real conversations and sharing quiet, meaningful moments. I look for strong emotional and intellectual bonds.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q9b" name="q9_connecting" value="SD">
-                            <label for="q9b">b) Working together on practical tasks or talking about smart plans. I connect through shared goals and supporting each other.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q9c" name="q9_connecting" value="DS" required>
-                            <label for="q9c">c) Having intellectual discussions, exploring fun new experiences, and playful joking. I thrive on mental excitement and lighthearted interaction.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q9d" name="q9_connecting" value="DD">
-                            <label for="q9d">d) Focusing on shared goals and having direct, impactful discussions. I connect through a clear purpose and making steady progress.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>10. When someone communicates with me, I respond best to a style that is:</p>
-                        <div class="option">
-                            <input type="radio" id="q10a" name="q10_communication_response" value="SS" required>
-                            <label for="q10a">a) Calm, respectful, unhurried, and provides thorough details. I need time to think and appreciate depth.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10b" name="q10_communication_response" value="SD">
-                            <label for="q10b">b) Confident, trustworthy, practical, and offers clear next steps. I value usefulness and a balanced approach.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10c" name="q10_communication_response" value="DS" required>
-                            <label for="q10c">c) Engaging, clever, exploratory, and presents interesting new ideas. I'm drawn to novelty and mental stimulation.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10d" name="q10_communication_response" value="DD">
-                            <label for="q10d">d) Direct, confident, empowering, and clearly focused on results. I appreciate efficiency and a clear call to action.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>11. When it comes to my personal space and daily routine, I generally prefer:</p>
-                        <div class="option">
-                            <input type="radio" id="q11a" name="q11_personal_space" value="SS" required>
-                            <label for="q11a">a) A stable and organized environment that helps me think deeply. I need a peaceful place for quiet thought and inner calm.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q11b" name="q11_personal_space" value="SD">
-                            <label for="q11b">b) A well-arranged space that allows for a good mix of work and free time. I value efficiency and a smooth flow in my daily life.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q11c" name="q11_personal_space" value="DS" required>
-                            <label for="q11c">c) An energetic and exciting environment that sparks my creativity and desire to explore. I thrive on newness and a constantly changing scene.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q11d" name="q11_personal_space" value="DD">
-                            <label for="q11d">d) A highly efficient and practical space that helps me act fast and be productive. I need an environment designed for getting things done.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>12. When facing a tough decision, I tend to:</p>
-                        <div class="option">
-                            <input type="radio" id="q12a" name="q12_decision" value="SS" required>
-                            <label for="q12a">a) Take plenty of time to fully understand all the information and think about long-term effects. I prioritize safety and avoiding future problems.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q12b" name="q12_decision" value="SD">
-                            <label for="q12b">b) Weigh all the pros and cons to find the most balanced and sensible solution. I aim for the best outcome through smart evaluation.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q12c" name="q12_decision" value="DS" required>
-                            <label for="q12c">c) Explore many different creative options, sometimes finding it hard to narrow them down. I'm drawn to new possibilities and inventive solutions.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q12d" name="q12_decision" value="DD">
-                            <label for="q12d">d) Make a quick, firm choice and move forward without looking back. I am driven by action and getting immediate results.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>13. My ideal free time activity often involves:</p>
-                        <div class="option">
-                            <input type="radio" id="q13a" name="q13_free_time" value="SS" required>
-                            <label for="q13a">a) Quiet reflection, connecting with nature, or getting lost in meaningful art. I find peace in thinking deeply and genuine experiences.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q13b" name="q13_free_time" value="SD">
-                            <label for="q13b">b) Balanced activities that mix social time with practical tasks or strategic games. I enjoy harmonious and purposeful recreation.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q13c" name="q13_free_time" value="DS" required>
-                            <label for="q13c">c) Seeking out new and exciting experiences, mental challenges, or lively social events. I thrive on excitement and intellectual stimulation.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q13d" name="q13_free_time" value="DD">
-                            <label for="q13d">d) Intense, goal-focused activities, pushing my limits, or achieving personal bests. I am driven by competition and clear accomplishments.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>14. If someone is upset, my first instinct is to:</p>
-                        <div class="option">
-                            <input type="radio" id="q14a" name="q14_upset_response" value="SS" required>
-                            <label for="q14a">a) Listen deeply and with empathy, trying to understand the real reason for their feelings. I aim for profound understanding and emotional honesty.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q14b" name="q14_upset_response" value="SD">
-                            <label for="q14b">b) Offer practical advice and help them plan a balanced way to solve their problem. I want to bring back harmony and find effective solutions.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q14c" name="q14_upset_response" value="DS" required>
-                            <label for="q14c">c) Engage them in an interesting conversation to explore different viewpoints and possibilities. I'm curious about the situation and potential fixes.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q14d" name="q14_upset_response" value="DD">
-                            <label for="q14d">d) Directly address the issue and focus on finding an immediate, clear solution. I prioritize action and getting to a definite outcome.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>15. When I come across new information, I am most interested in:</p>
-                        <div class="option">
-                            <input type="radio" id="q15a" name="q15_new_info" value="SS" required>
-                            <label for="q15a">a) How it helps me understand deeper truths or how things fit together in a bigger picture. I look for profound insights and basic principles.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q15b" name="q15_new_info" value="SD">
-                            <label for="q15b">b) Its practical use and how it can be smartly applied for the best results. I value efficiency and real-world usefulness.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q15c" name="q15_new_info" value="DS" required>
-                            <label for="q15c">c) Its newness, how it challenges old ideas, or its potential for creative breakthroughs. I'm drawn to fresh concepts and mental exploration.</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q15d" name="q15_new_info" value="DD">
-                            <label for="q15d">d) Its immediate usefulness and how it can drive progress or lead to concrete achievements. I prioritize actionable insights and clear impact.</label>
-                        </div>
-                    </div>
-
-                    <div class="survey-question">
-                        <p>16. How do you typically react when you're under a lot of pressure or have a tight deadline?</p>
-                        <div class="option">
-                            <input type="radio" id="q16a" name="q16_pressure" value="SS" required>
-                            <label for="q16a">a) I tend to step back and think things through on my own, needing quiet time to process deeply and make sure I don't miss important details before acting. My focus is on being thorough and stable.</lab
+            <!-- Member Search & Survey Section 
