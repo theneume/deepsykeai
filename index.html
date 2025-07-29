@@ -222,6 +222,26 @@
             font-weight: 500;
             color: #ffffff;
         }
+
+        /* Loading Spinner */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -238,12 +258,9 @@
                         <stop offset="100%" style="stop-color:#87ceeb;stop-opacity:1" />
                     </linearGradient>
                 </defs>
-                <!-- Central "eye" or "insight" point -->
                 <circle cx="50" cy="50" r="15" fill="url(#grad2)"/>
-                <!-- Abstract "layers" or "depth" -->
                 <path d="M50 5C74.8528 5 95 25.1472 95 50C95 74.8528 74.8528 95 50 95C25.1472 95 5 74.8528 5 50C5 25.1472 25.1472 5 50 5Z" stroke="url(#grad1)" stroke-width="3" opacity="0.7"/>
                 <path d="M50 15C69.33 15 85 30.67 85 50C85 69.33 69.33 85 50 85C30.67 85 15 69.33 15 50C15 30.67 30.67 15 50 15Z" stroke="url(#grad2)" stroke-width="2" opacity="0.5"/>
-                <!-- Subtle "search" or "connection" lines -->
                 <line x1="50" y1="50" x2="70" y2="30" stroke="#b0c4de" stroke-width="1" opacity="0.6"/>
                 <line x1="50" y1="50" x2="30" y2="70" stroke="#b0c4de" stroke-width="1" opacity="0.6"/>
             </svg>
@@ -252,7 +269,6 @@
         <h1>The Hyper-Personalized Search & Opportunity Engine</h1>
 
         <div class="form-section">
-            <!-- Global Navigation Buttons -->
             <div class="nav-buttons">
                 <button onclick="showMemberSignupPage()">Member Signup</button>
                 <button onclick="showMemberUIPage()">Member Area</button>
@@ -261,7 +277,6 @@
                 <button onclick="showAdminUIPage()">Admin Area</button>
             </div>
 
-            <!-- 1. Member Signup Page (Initial entry for new members) -->
             <div id="memberSignupPage" class="page-section">
                 <h2 class="text-xl text-white font-semibold mb-4">Join DEEPSYKE: Unlock Your Personalized World</h2>
                 <form id="memberSurveyForm" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_HASH" method="POST">
@@ -279,7 +294,6 @@
                     </div>
 
                     <h3 class="text-lg text-white font-semibold mb-4">Instructions: Please choose the option that best describes you for each question.</h3>
-                    <!-- Survey Questions (Q1-Q20) - These are the same as before -->
                     <div class="survey-question">
                         <p>1. When starting something new, my main focus is usually on:</p>
                         <div class="option">
@@ -381,21 +395,21 @@
                             <input type="radio" id="q6a" name="q6_goal_reaching" value="SS" required>
                             <label for="q6a">a) Carefully planning every detail and moving cautiously, making sure it will last. I prioritize stability and careful execution.</label>
                             </div>
-                            <div class="option">
+                        <div class="option">
                                 <input type="radio" id="q6b" name="q6_goal_reaching" value="SD">
                                 <label for="q6b">b) Creating a balanced plan and adjusting it practically as things change. I aim for the most effective and smooth progress.</label>
                             </div>
-                            <div class="option">
+                        <div class="option">
                                 <input type="radio" id="q6c" name="q6_goal_reaching" value="DS" required>
                                 <label for="q6c">c) Starting many different ideas and exploring various paths, even if some don't get finished. I'm excited by the thrill of new beginnings.</label>
                             </div>
-                            <div class="option">
+                        <div class="option">
                                 <input type="radio" id="q6d" name="q6_goal_reaching" value="DD">
                                 <label for="q6d">d) Acting quickly and firmly, relentlessly pushing through challenges to get the job done. I am focused on concrete results and making a strong impact.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>7. What I want most in life can be described as:</p>
                             <div class="option">
                                 <input type="radio" id="q7a" name="q7_life_desire" value="SS" required>
@@ -413,9 +427,9 @@
                                 <input type="radio" id="q7d" name="q7_life_desire" value="DD">
                                 <label for="q7d">d) Immediate, clear results, efficiency, and a feeling of power or accomplishment. I am driven by making a strong impact and clear success.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>8. How do you think others generally see you?</p>
                             <div class="option">
                                 <input type="radio" id="q8a" name="q8_others_see_you" value="SS" required>
@@ -433,9 +447,9 @@
                                 <input type="radio" id="q8d" name="q8_others_see_you" value="DD">
                                 <label for="q8d">d) Direct, confident, decisive, and perhaps sometimes stubborn or very serious. I'm often seen as a strong leader or someone who gets things done.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>9. My main way of connecting with others is by:</p>
                             <div class="option">
                                 <input type="radio" id="q9a" name="q9_connecting" value="SS" required>
@@ -453,9 +467,9 @@
                                 <input type="radio" id="q9d" name="q9_connecting" value="DD">
                                 <label for="q9d">d) Focusing on shared goals and having direct, impactful discussions. I connect through a clear purpose and making steady progress.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>10. When someone communicates with me, I respond best to a style that is:</p>
                             <div class="option">
                                 <input type="radio" id="q10a" name="q10_communication_response" value="SS" required>
@@ -473,9 +487,9 @@
                                 <input type="radio" id="q10d" name="q10_communication_response" value="DD">
                                 <label for="q10d">d) Direct, confident, empowering, and clearly focused on results. I appreciate efficiency and a clear call to action.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>11. When it comes to my personal space and daily routine, I generally prefer:</p>
                             <div class="option">
                                 <input type="radio" id="q11a" name="q11_personal_space" value="SS" required>
@@ -493,9 +507,9 @@
                                 <input type="radio" id="q11d" name="q11_personal_space" value="DD">
                                 <label for="q11d">d) A highly efficient and practical space that helps me act fast and be productive. I need an environment designed for getting things done.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>12. When facing a tough decision, I tend to:</p>
                             <div class="option">
                                 <input type="radio" id="q12a" name="q12_decision" value="SS" required>
@@ -513,9 +527,9 @@
                                 <input type="radio" id="q12d" name="q12_decision" value="DD">
                                 <label for="q12d">d) Make a quick, firm choice and move forward without looking back. I am driven by action and getting immediate results.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>13. My ideal free time activity often involves:</p>
                             <div class="option">
                                 <input type="radio" id="q13a" name="q13_free_time" value="SS" required>
@@ -533,9 +547,9 @@
                                 <input type="radio" id="q13d" name="q13_free_time" value="DD">
                                 <label for="q13d">d) Intense, goal-focused activities, pushing my limits, or achieving personal bests. I am driven by competition and clear accomplishments.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>14. If someone is upset, my first instinct is to:</p>
                             <div class="option">
                                 <input type="radio" id="q14a" name="q14_upset_response" value="SS" required>
@@ -553,9 +567,9 @@
                                 <input type="radio" id="q14d" name="q14_upset_response" value="DD">
                                 <label for="q14d">d) Directly address the issue and focus on finding an immediate, clear solution. I prioritize action and getting to a definite outcome.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>15. When I come across new information, I am most interested in:</p>
                             <div class="option">
                                 <input type="radio" id="q15a" name="q15_new_info" value="SS" required>
@@ -573,9 +587,9 @@
                                 <input type="radio" id="q15d" name="q15_new_info" value="DD">
                                 <label for="q15d">d) Its immediate usefulness and how it can drive progress or lead to concrete achievements. I prioritize actionable insights and clear impact.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>16. How do you typically react when you're under a lot of pressure or have a tight deadline?</p>
                             <div class="option">
                                 <input type="radio" id="q16a" name="q16_pressure" value="SS" required>
@@ -593,9 +607,9 @@
                                 <input type="radio" id="q16d" name="q16_pressure" value="DD">
                                 <label for="q16d">d) I become intensely driven and determined, focusing completely on the task to push through any difficulties and achieve the result. My willpower is incredibly strong.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>17. When I hear a marketing or sales pitch, my first thought is usually:</p>
                             <div class="option">
                                 <input type="radio" id="q17a" name="q17_pitch" value="SS" required>
@@ -613,9 +627,9 @@
                                 <input type="radio" id="q17d" name="q17_pitch" value="DD">
                                 <label for="q17d">d) I'm direct and focused on results; I quickly decide if it offers clear benefits or immediate solutions; otherwise, I'm not interested. I prioritize efficiency and quick impact.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>18. Regarding new ideas versus old ways, I tend to believe:</p>
                             <div class="option">
                                 <input type="radio" id="q18a" name="q18_new_vs_old" value="SS" required>
@@ -633,9 +647,9 @@
                                 <input type="radio" id="q18d" name="q18_new_vs_old" value="DD">
                                 <label for="q18d">d) Progress is about constantly moving forward and reaching new achievements, and old ways are only useful if they directly help with efficiency and results. I am focused on clear outcomes and making an impact.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>19. When it comes to my passions and the causes I care about, I am most drawn to:</p>
                             <div class="option">
                                 <input type="radio" id="q19a" name="q19_passions" value="SS" required>
@@ -646,16 +660,16 @@
                                 <label for="q19b">b) Standing up for fairness and balance, building strong, loyal communities, or smartly working towards practical, impactful change. I am driven by justice and effective action.</label>
                             </div>
                             <div class="option">
-                                <input type="radio" id="q19c" name="q19" value="DS" required>
+                                <input type="radio" id="q19c" name="q19_passions" value="DS" required>
                                 <label for="q19c">c) Exploring unique intellectual concepts, being creative, or seeking social recognition for innovative ideas. I thrive on mental stimulation and exciting new pursuits.</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q19d" name="q19_passions" value="DD">
                                 <label for="q19d">d) Leading impactful projects, overcoming big challenges, or making clear progress for a cause I believe in. I am motivated by achievement and direct results.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="survey-question">
+                    <div class="survey-question">
                             <p>20. My view on politics and world events is mainly:</p>
                             <div class="option">
                                 <input type="radio" id="q20a" name="q20_politics" value="SS" required>
@@ -673,9 +687,9 @@
                                 <input type="radio" id="q20d" name="q20_politics" value="DD">
                                 <label for="q20d">d) I'm direct and action-oriented, focused on strong leadership and clear results to solve global problems and drive progress. I prioritize impact and definite outcomes.</label>
                             </div>
-                        </div>
+                    </div>
 
-                        <div class="subscription-options">
+                    <div class="subscription-options">
                             <h3 class="text-lg text-white font-semibold mb-3">Choose Your Membership:</h3>
                             <div class="subscription-option">
                                 <input type="radio" id="subBasic" name="subscription" value="basic" required>
@@ -685,13 +699,11 @@
                                 <input type="radio" id="subPremium" name="subscription" value="premium">
                                 <label for="subPremium">$59.95 / month (Unlimited searches/reports/offers)</label>
                             </div>
-                            <button type="submit" onclick="handleMemberSignup()">Proceed to Payment (Placeholder)</button>
-                        </div>
-                    </form>
-                </div>
+                            <button type="submit" id="memberSurveySubmitBtn">Proceed to Payment (Placeholder)</button>
+                    </div>
+                </form>
             </div>
 
-            <!-- 2. Member UI Page (Post-Survey) -->
             <div id="memberUIPage" class="page-section">
                 <h2 class="text-xl text-white font-semibold mb-4">Your Personalized DEEPSYKE Experience</h2>
                 <div class="search-bar-group">
@@ -709,7 +721,6 @@
                 </div>
             </div>
 
-            <!-- 3. Business Signup Page -->
             <div id="businessSignupPage" class="page-section">
                 <h2 class="text-xl text-white font-semibold mb-4">Join DEEPSYKE as a Business/Practitioner</h2>
                 <form id="businessProfileForm" action="https://formspree.io/f/YOUR_FORMSPREE_ADMIN_HASH" method="POST">
@@ -746,12 +757,11 @@
                         <label for="specialOffer">Special Offer for DEEPSYKE Members (Optional):</label>
                         <input type="text" id="specialOffer" name="special_offer" placeholder="e.g., '15% off first consultation', 'Free e-book'">
                     </div>
-                    <button type="submit">Submit Profile</button>
+                    <button type="submit" id="businessSubmitBtn">Submit Profile</button>
                 </form>
                 <button onclick="showBusinessUIPage()" class="mt-4 toggle-btn">Go to Business Area</button>
             </div>
 
-            <!-- 4. Business UI Page -->
             <div id="businessUIPage" class="page-section">
                 <h2 class="text-xl text-white font-semibold mb-4">Business Dashboard</h2>
                 <p class="text-gray-300 mb-4">Welcome, Business User! Manage your profile, offers, and member engagement here.</p>
@@ -762,7 +772,6 @@
                 </div>
             </div>
 
-            <!-- 5. Admin UI Page -->
             <div id="adminUIPage" class="page-section">
                 <h2 class="text-xl text-white font-semibold mb-4">Admin Control Panel</h2>
                 <p class="text-gray-300 mb-4">Welcome, Admin! Manage members, businesses, and system data.</p>
@@ -776,20 +785,37 @@
         </div>
 
         <div id="resultsOutput" class="results-area">
-            <!-- Search results or submission confirmations will appear here -->
-            <p class="text-center text-gray-400">Welcome to DEEPSYKE. Please select an option above.</p>
+            <p class="text-center text-gray-400">Welcome to DEEPSYKE. Please select an option above, or complete the Member Signup Survey to get started!</p>
         </div>
     </div>
 
     <script>
+        // Helper function to get question name from index (for consistency)
+        function getQuestionName(index) {
+            const names = {
+                1: 'focus', 2: 'social', 3: 'appealing_quality', 4: 'challenge', 5: 'past',
+                6: 'goal_reaching', 7: 'life_desire', 8: 'others_see_you', 9: 'connecting',
+                10: 'communication_response', 11: 'personal_space', 12: 'decision',
+                13: 'free_time', 14: 'upset_response', 15: 'new_info', 16: 'pressure',
+                17: 'pitch', 18: 'new_vs_old', 19: 'passions', 20: 'politics'
+            };
+            return names[index];
+        }
+
         // Function to show a specific page section and hide others
         function showPage(pageId) {
             const pages = ['memberSignupPage', 'memberUIPage', 'businessSignupPage', 'businessUIPage', 'adminUIPage'];
             pages.forEach(id => {
-                document.getElementById(id).classList.add('hidden');
+                const pageElement = document.getElementById(id);
+                if (pageElement) {
+                    pageElement.classList.add('hidden');
+                }
             });
-            document.getElementById(pageId).classList.remove('hidden');
-            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Welcome to DEEPSYKE. Please select an option above.</p>'; // Clear results area on page switch
+            const selectedPageElement = document.getElementById(pageId);
+            if (selectedPageElement) {
+                selectedPageElement.classList.remove('hidden');
+            }
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Welcome to DEEPSYKE. Please select an option above, or complete the Member Signup Survey to get started!</p>'; // Clear results area on page switch
         }
 
         // Function to check if survey is completed (simulated with localStorage)
@@ -797,41 +823,46 @@
             return localStorage.getItem('deepsyke_survey_completed') === 'true';
         }
 
-        // Function to set survey as completed
-        function setSurveyCompleted() {
+        // Function to set survey as completed and store affinity zone
+        function setSurveyCompleted(affinityZone) {
             localStorage.setItem('deepsyke_survey_completed', 'true');
+            localStorage.setItem('deepsyke_user_affinity_zone', affinityZone);
+        }
+
+        // Function to get stored Affinity Zone
+        function getUserAffinityZone() {
+            return localStorage.getItem('deepsyke_user_affinity_zone') || 'UNKNOWN';
         }
 
         // Navigation functions
         function showMemberSignupPage() {
             showPage('memberSignupPage');
-            document.getElementById('surveySeparator').classList.remove('hidden'); // Ensure separator is visible for signup
-            document.getElementById('memberSurveyContent').classList.remove('hidden'); // Ensure survey is visible
             document.getElementById('memberName').focus(); // Focus on name field
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Complete the survey to unlock your personalized DEEPSYKE experience.</p>';
         }
 
         function showMemberUIPage() {
             showPage('memberUIPage');
             document.getElementById('memberSearchQueryUI').focus(); // Focus on search bar for member UI
-            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Enter your query to find personalized opportunities.</p>';
+            const userZone = getUserAffinityZone();
+            document.getElementById('resultsOutput').innerHTML = `<p class="text-center text-gray-400">Welcome back! Your current Affinity Zone is: <span class="text-blue-300 font-semibold">${userZone}</span>. Enter your query to find personalized opportunities.</p>`;
         }
 
         function showBusinessSignupPage() {
             showPage('businessSignupPage');
             document.getElementById('businessName').focus(); // Focus on business name field
-            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Submit business profiles here.</p>';
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Submit business profiles here to connect with hyper-personalized members.</p>';
         }
 
         function showBusinessUIPage() {
             showPage('businessUIPage');
-            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Manage your business details.</p>';
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Manage your business details and member engagement data.</p>';
         }
 
         function showAdminUIPage() {
             showPage('adminUIPage');
-            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Admin actions and insights.</p>';
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Admin actions and insights for system oversight.</p>';
         }
-
 
         // Initial UI setup on page load
         window.onload = () => {
@@ -842,67 +873,68 @@
             }
         };
 
-        document.getElementById('memberSurveyForm').addEventListener('submit', async function(event) {
-            event.preventDefault(); // Prevent default form submission to handle via JS
-            await submitMemberSurvey();
-            // After successful survey submission, transition to Member UI
-            if (checkSurveyStatus()) {
-                showMemberUIPage();
-            }
-        });
-
-        document.getElementById('businessProfileForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission to handle via JS
-            submitBusinessProfile();
-        });
-
-        function performMemberSearch() {
-            const query = document.getElementById('memberSearchQueryUI').value; // Changed ID to match member UI search bar
-            const resultsOutput = document.getElementById('resultsOutput');
-
-            if (!query.trim()) {
-                resultsOutput.innerHTML = '<p class="text-red-400">Please enter a search query.</p>';
-                return;
+        // --- Core Affinity Zone Calculation Logic ---
+        function calculateAffinityZone(surveyResponses) {
+            const counts = { SS: 0, SD: 0, DS: 0, DD: 0 };
+            for (const key in surveyResponses) {
+                const value = surveyResponses[key];
+                if (counts.hasOwnProperty(value)) {
+                    counts[value]++;
+                }
             }
 
-            resultsOutput.innerHTML = `<p class="text-blue-300">Searching for opportunities related to "${query}"...</p>`;
-            console.log(`Member search query: "${query}"`);
+            let dominantZone = 'UNKNOWN';
+            let maxCount = 0;
+            let tiedZones = [];
 
-            // Placeholder for future backend call to Lambda/Gemini
-            setTimeout(() => {
-                resultsOutput.innerHTML = `
-                    <h3 class="text-xl text-white font-semibold mb-3">Your Personalized Insights for "${query}"</h3>
-                    <div class="mb-4">
-                        <p class="text-lg text-blue-300 font-medium">Zenith Coaching: Forge Your Path</p>
-                        <p class="text-sm text-gray-300">"This sounds like a powerful way to spend a Tuesday morning. Zenith Coaching offers programs that resonate with those who love to push boundaries and explore new horizons. Remember, 'The best fun is had when you're not depressed' - Leonard Cohen."</p>
-                    </div>
-                    <div class="mb-4">
-                        <p class="text-lg text-blue-300 font-medium">"The Art of Not Finishing" - A Workshop Series</p>
-                        <p class="text-sm text-gray-300">"It's not procrastination to not finish a task. Maybe it's just we are too refined for our own good. This workshop series celebrates the exploratory journey, offering tools to find joy in the process, not just the destination."</p>
-                    </div>
-                    <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
-                `;
-                console.log("Placeholder search results displayed.");
-            }, 2000);
+            for (const zone in counts) {
+                if (counts[zone] > maxCount) {
+                    maxCount = counts[zone];
+                    dominantZone = zone;
+                    tiedZones = [zone]; // Reset tied zones
+                } else if (counts[zone] === maxCount && maxCount > 0) {
+                    tiedZones.push(zone); // Add to tied zones
+                }
+            }
+
+            // If there's a clear dominant zone, return it
+            if (tiedZones.length === 1) {
+                return dominantZone;
+            } else if (tiedZones.length > 1) {
+                // Handle ties: For simplicity, if multiple zones are tied,
+                // we'll return a concatenated string (e.g., "SS/SD")
+                // In a real system, more sophisticated tie-breaking logic or a blended profile might be used.
+                return tiedZones.sort().join('/');
+            }
+            return 'UNKNOWN'; // No responses or all zeros
         }
 
-        async function submitMemberSurvey() {
+
+        document.getElementById('memberSurveyForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission to handle via JS
+            const resultsOutput = document.getElementById('resultsOutput');
+            const submitBtn = document.getElementById('memberSurveySubmitBtn');
+
+            submitBtn.disabled = true;
+            resultsOutput.innerHTML = `<div class="loader"></div> <span class="loading-text text-blue-300">Submitting your survey...</span>`;
+
             const memberName = document.getElementById('memberName').value;
             const memberEmail = document.getElementById('memberEmail').value;
             const memberCountry = document.getElementById('memberCountry').value;
-            const resultsOutput = document.getElementById('resultsOutput');
 
             if (!memberName.trim() || !memberEmail.trim() || !memberCountry.trim()) {
                 resultsOutput.innerHTML = '<p class="text-red-400">Please fill in your Name, Email, and Country.</p>';
+                submitBtn.disabled = false;
                 return;
             }
 
             const surveyResponses = {};
             let allQuestionsAnswered = true;
             for (let i = 1; i <= 20; i++) { // Assuming 20 questions
-                const selectedOption = document.querySelector(`input[name="q${i}_${getQuestionName(i)}"]:checked`);
+                const questionName = `q${i}_${getQuestionName(i)}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
                 if (selectedOption) {
-                    surveyResponses[`q${i}_${getQuestionName(i)}`] = selectedOption.value;
+                    surveyResponses[questionName] = selectedOption.value;
                 } else {
                     allQuestionsAnswered = false;
                     break;
@@ -911,30 +943,37 @@
 
             if (!allQuestionsAnswered) {
                 resultsOutput.innerHTML = '<p class="text-red-400">Please answer all survey questions.</p>';
+                submitBtn.disabled = false;
                 return;
             }
 
-            // Check if a subscription option is selected
             const selectedSubscription = document.querySelector('input[name="subscription"]:checked');
             if (!selectedSubscription) {
                 resultsOutput.innerHTML = '<p class="text-red-400">Please select a subscription plan.</p>';
+                submitBtn.disabled = false;
                 return;
             }
             const subscriptionPlan = selectedSubscription.value;
 
+            // Calculate the Affinity Zone
+            const userAffinityZone = calculateAffinityZone(surveyResponses);
 
-            resultsOutput.innerHTML = `<p class="text-blue-300">Submitting your survey and processing payment for ${subscriptionPlan} plan, ${memberName}. Please wait...</p>`;
+            resultsOutput.innerHTML = `<div class="loader"></div> <span class="loading-text text-blue-300">Processing your ${subscriptionPlan} membership for ${memberName}...</span>`;
             console.log("Member Survey Submission Data:", {
                 memberName,
                 memberEmail,
                 memberCountry,
                 surveyResponses,
-                subscriptionPlan
+                subscriptionPlan,
+                userAffinityZone // Include the calculated Affinity Zone
             });
 
-            // --- Formspree Submission (for survey data) ---
+            // Simulate network delay for Formspree submission
+            await new Promise(resolve => setTimeout(1500));
+
             const form = document.getElementById('memberSurveyForm');
             const formData = new FormData(form);
+            formData.append('affinity_zone', userAffinityZone); // Add calculated zone to form data
 
             try {
                 const response = await fetch(form.action, {
@@ -948,10 +987,10 @@
                 if (response.ok) {
                     resultsOutput.innerHTML = `
                         <h3 class="text-xl text-white font-semibold mb-3">Survey & Subscription Submitted!</h3>
-                        <p class="text-green-400">Thank you, ${memberName}! Your responses and payment for the ${subscriptionPlan} plan have been processed. We will begin personalizing your DEEPSYKE experience.</p>
+                        <p class="text-green-400">Thank you, ${memberName}! Your responses and payment for the ${subscriptionPlan} plan have been processed. Your Affinity Zone has been determined as: <span class="font-bold">${userAffinityZone}</span>. We will begin personalizing your DEEPSYKE experience.</p>
                         <p class="text-gray-400 mt-4">You can now explore your personalized sections.</p>
                     `;
-                    setSurveyCompleted(); // Mark survey as completed
+                    setSurveyCompleted(userAffinityZone); // Mark survey as completed and store zone
                     form.reset(); // Resets all form fields
                 } else {
                     const errorData = await response.json();
@@ -961,24 +1000,31 @@
             } catch (error) {
                 resultsOutput.innerHTML = `<p class="text-red-400">Network error submitting survey. Please try again.</p>`;
                 console.error('Fetch error:', error);
+            } finally {
+                submitBtn.disabled = false;
             }
-            // --- End Formspree Submission ---
-        }
+        });
 
-        async function submitBusinessProfile() {
+        document.getElementById('businessProfileForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const resultsOutput = document.getElementById('resultsOutput');
+            const submitBtn = document.getElementById('businessSubmitBtn');
+
+            submitBtn.disabled = true;
+            resultsOutput.innerHTML = `<div class="loader"></div> <span class="loading-text text-blue-300">Submitting business profile...</span>`;
+
             const businessName = document.getElementById('businessName').value;
             const serviceDescription = document.getElementById('serviceDescription').value;
             const specialOffer = document.getElementById('specialOffer').value;
             const selectedAffinityZones = Array.from(document.querySelectorAll('#businessProfileForm .affinity-checkboxes input[type="checkbox"]:checked'))
-                                                .map(cb => cb.value);
-            const resultsOutput = document.getElementById('resultsOutput');
+                                                     .map(cb => cb.value);
 
             if (!businessName.trim() || !serviceDescription.trim() || selectedAffinityZones.length === 0) {
                 resultsOutput.innerHTML = '<p class="text-red-400">Please fill in business name, service description, and select at least one Associated Affinity Zone.</p>';
+                submitBtn.disabled = false;
                 return;
             }
 
-            resultsOutput.innerHTML = `<p class="text-blue-300">Submitting profile for "${businessName}"...</p>`;
             console.log("Business Profile Submission Data:", {
                 businessName,
                 serviceDescription,
@@ -986,11 +1032,12 @@
                 specialOffer: specialOffer || "N/A"
             });
 
-            // --- Formspree Submission for Admin ---
+            // Simulate network delay for Formspree submission
+            await new Promise(resolve => setTimeout(1500));
+
             const form = document.getElementById('businessProfileForm');
             const formData = new FormData(form);
-            // Add a hidden field to denote admin submission, if Formspree supports it or for your future backend
-            formData.append('submission_type', 'admin_profile');
+            formData.append('submission_type', 'business_profile'); // Add a type for Formspree filtering
 
             try {
                 const response = await fetch(form.action, {
@@ -1006,7 +1053,6 @@
                         <p class="text-green-400">Profile for "${businessName}" submitted successfully!</p>
                         <p class="text-gray-300 mt-2">Associated with: ${selectedAffinityZones.join(', ')}</p>
                     `;
-                    // Clear form fields after successful submission
                     form.reset();
                 } else {
                     const errorData = await response.json();
@@ -1016,43 +1062,273 @@
             } catch (error) {
                 resultsOutput.innerHTML = `<p class="text-red-400">Network error submitting profile. Please try again.</p>`;
                 console.error('Fetch error:', error);
+            } finally {
+                submitBtn.disabled = false;
             }
-            // --- End Formspree Submission for Admin ---
+        });
+
+
+        function performMemberSearch() {
+            const query = document.getElementById('memberSearchQueryUI').value;
+            const resultsOutput = document.getElementById('resultsOutput');
+            const userZone = getUserAffinityZone();
+
+            if (!query.trim()) {
+                resultsOutput.innerHTML = '<p class="text-red-400">Please enter a search query.</p>';
+                return;
+            }
+
+            resultsOutput.innerHTML = `<div class="loader"></div> <span class="loading-text text-blue-300">Searching for hyper-personalized opportunities for a ${userZone} related to "${query}"...</span>`;
+            console.log(`Member search query: "${query}" for Affinity Zone: ${userZone}`);
+
+            // Placeholder for future backend call to Lambda/Gemini
+            setTimeout(() => {
+                let dynamicContent = '';
+                switch(userZone) {
+                    case 'SS':
+                        dynamicContent = `
+                            <p class="text-lg text-blue-300 font-medium">"Deep Dive Meditations: Finding Clarity" - Curated for SS</p>
+                            <p class="text-sm text-gray-300">"Explore practices for profound introspection and inner peace. Designed to help Grounded Processors like you find stable ground amidst complexity."</p>
+                            <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"Ethical Investment Strategies" - From 'The Conscious Investor'</p>
+                                <p class="text-sm text-gray-300">"Align your financial decisions with your deepest values. Ideal for SS types seeking long-term security and genuine impact."</p>
+                            </div>
+                        `;
+                        break;
+                    case 'SD':
+                        dynamicContent = `
+                            <p class="text-lg text-blue-300 font-medium">"Strategic Life Planning Workshop: Achieve Balanced Growth" - Curated for SD</p>
+                            <p class="text-sm text-gray-300">"Master the art of effective planning and harmonious execution. Perfect for Strategic Navigators aiming for optimal outcomes in all areas of life."</p>
+                            <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"Community Building & Collaboration Tools" - From 'Harmony Hub'</p>
+                                <p class="text-sm text-gray-300">"Discover resources for fostering strong, balanced relationships and practical teamwork, resonating with your natural SD inclinations."</p>
+                            </div>
+                        `;
+                        break;
+                    case 'DS':
+                        dynamicContent = `
+                            <p class="text-lg text-blue-300 font-medium">"Novel Ideas Incubator: Spark Your Next Big Thing" - Curated for DS</p>
+                            <p class="text-sm text-gray-300">"Unleash your creative genius and explore a multitude of innovative concepts. This is for Exploratory Innovators who thrive on novelty and intellectual challenge."</p>
+                            <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"The Art of Not Finishing" - A Workshop Series</p>
+                                <p class="text-sm text-gray-300">"It's not procrastination to not finish a task. Maybe it's just we are too refined for our own good. This workshop series celebrates the exploratory journey, offering tools to find joy in the process, not just the destination."</p>
+                            </div>
+                        `;
+                        break;
+                    case 'DD':
+                        dynamicContent = `
+                            <p class="text-lg text-blue-300 font-medium">"Zenith Coaching: Forge Your Path to Unstoppable Achievement" - Curated for DD</p>
+                            <p class="text-sm text-gray-300">"This powerful program is designed for those who lead with passion and seek to manifest bold visions. Their direct, results-oriented style will resonate deeply with your core drive as a Dynamic Initiator."</p>
+                            <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"High-Impact Strategies for Rapid Results" - From 'The Accelerator Blueprint'</p>
+                                <p class="text-sm text-gray-300">"Tools and techniques for maximizing efficiency and achieving concrete outcomes, perfectly suited for your DD drive."</p>
+                            </div>
+                        `;
+                        break;
+                    default:
+                        dynamicContent = `
+                            <p class="text-lg text-blue-300 font-medium">General Opportunities for "${query}"</p>
+                            <p class="text-sm text-gray-300">"Discover a range of options related to your query. Complete our survey for truly personalized results!"</p>
+                        `;
+                        break;
+                }
+
+                resultsOutput.innerHTML = `
+                    <h3 class="text-xl text-white font-semibold mb-3">Your Personalized Insights for "${query}"</h3>
+                    ${dynamicContent}
+                    <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
+                `;
+                console.log("Placeholder search results displayed.");
+            }, 2000);
         }
 
-        // New functions for personalized sections
         function showPersonalReport() {
             const resultsOutput = document.getElementById('resultsOutput');
+            const userZone = getUserAffinityZone();
+
+            let reportContent = '';
+            switch(userZone) {
+                case 'SS':
+                    reportContent = `
+                        <p class="text-lg text-blue-300 font-medium">Your SS Report: The Grounded Processor's Inner World</p>
+                        <p class="text-sm text-gray-300">"You are deeply reflective, valuing security and profound understanding. Your strength lies in your ability to process information thoroughly and connect with authentic truths. Your path to wholeness involves embracing gentle novelty and expressing your deep insights to the world."</p>
+                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for SS:</h4>
+                        <ul class="list-disc list-inside text-gray-300 mb-4">
+                            <li>Consciously introduce small, manageable new experiences to stimulate your dopamine.</li>
+                            <li>Practice direct, concise communication to share your insights without overthinking.</li>
+                            <li>Set healthy boundaries to protect your need for peace and reflection.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'SD':
+                    reportContent = `
+                        <p class="text-lg text-blue-300 font-medium">Your SD Report: The Strategic Navigator's Balanced Journey</p>
+                        <p class="text-sm text-gray-300">"You are a master of balance, blending practicality with a desire for harmony. Your strength is your ability to strategize effectively and foster strong, collaborative relationships. Your path to wholeness involves asserting your needs and embracing spontaneous vulnerability."</p>
+                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for SD:</h4>
+                        <ul class="list-disc list-inside text-gray-300 mb-4">
+                            <li>Dare to step outside your comfort zone of harmony and engage in healthy conflict when necessary.</li>
+                            <li>Prioritize self-care to avoid martyrdom or burnout from helping others.</li>
+                            <li>Embrace imperfection and allow for less controlled, more raw emotional expression.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'DS':
+                    reportContent = `
+                        <p class="text-lg text-blue-300 font-medium">Your DS Report: The Exploratory Innovator's Vibrant Mind</p>
+                        <p class="text-sm text-gray-300">"You are a wellspring of ideas, driven by curiosity and a love for novelty. Your charisma and intellectual agility are your superpowers. Your path to wholeness involves cultivating grounding, structure, and focusing on completing your many brilliant initiatives."</p>
+                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for DS:</h4>
+                        <ul class="list-disc list-inside text-gray-300 mb-4">
+                            <li>Practice intentional pausing to allow for deeper emotional processing and reduce scattered energy.</li>
+                            <li>Prioritize completion over constant initiation; choose a few projects to finish.</li>
+                            <li>Seek grounding activities like nature walks or mindful routines to balance your mental dynamism.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'DD':
+                    reportContent = `
+                        <p class="text-lg text-blue-300 font-medium">Your DD Report: The Dynamic Initiator's Relentless Drive</p>
+                        <p class="text-sm text-gray-300">"You are a force of nature, driven by achievement and clear results. Your confidence and ability to lead are undeniable. Your path to wholeness involves consciously inviting stillness, patience, and cultivating emotional nuance."</p>
+                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for DD:</h4>
+                        <ul class="list-disc list-inside text-gray-300 mb-4">
+                            <li>Practice active listening and empathy, valuing emotional expressions even if they lack "logic."</li>
+                            <li>Consciously slow your pace and create moments of quiet reflection.</li>
+                            <li>Learn to trust in others' capabilities, allowing for shared decision-making without needing to control every detail.</li>
+                        </ul>
+                    `;
+                    break;
+                default:
+                    reportContent = `
+                        <p class="text-lg text-blue-300 font-medium">Your Personalized Report</p>
+                        <p class="text-sm text-gray-300">"Complete the Member Signup Survey to unlock your unique Affinity Zone report and discover tailored insights for your personal growth!"</p>
+                    `;
+                    break;
+            }
+
             resultsOutput.innerHTML = `
                 <h3 class="text-xl text-white font-semibold mb-3">Your Personalized Report: Inner Harmony & Growth</h3>
                 <p class="text-gray-300 mb-4">Based on your unique insights, here's a snapshot of your current psychological landscape and areas for profound growth. Remember, understanding your inner currents is the first step to orchestrating your authentic life.</p>
-                <div class="mb-4">
-                    <p class="text-lg text-blue-300 font-medium">Current Focus: The Dance of Dynamic Exploration</p>
-                    <p class="text-sm text-gray-300">"You possess a vibrant spirit, constantly seeking new frontiers. This drive is a powerful asset, yet sometimes the journey itself becomes the destination, leaving tasks unfinished. It's like collecting beautiful seeds without planting them."</p>
-                    <p class="text-gray-400 mt-2">Insight from the DEEPSYKE Database: "It's not procrastination to not finish a task. Maybe it's just we are too refined for our own good."</p>
-                </div>
-                <h4 class="text-lg text-white font-semibold mb-3">Suggested Activities & Opportunities for You:</h4>
-                <ul class="list-disc list-inside text-gray-300 mb-4">
-                    <li>Explore new short-term creative projects that offer quick, satisfying completion.</li>
-                    <li>Engage in structured brainstorming sessions to channel your ideas into actionable steps.</li>
-                    <li>Read "The Paradox of Completion" – a DEEPSYKE curated article on finding satisfaction in finishing.</li>
-                    <li>Consider a workshop on "Mindful Momentum" to balance your drive with grounded execution.</li>
-                </ul>
+                ${reportContent}
                 <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
             `;
-            console.log("Personalized Report displayed.");
+            console.log("Personalized Report displayed for:", userZone);
         }
 
         function showExclusiveOffers() {
             const resultsOutput = document.getElementById('resultsOutput');
+            const userZone = getUserAffinityZone();
+
+            let offerContent = '';
+            switch(userZone) {
+                case 'SS':
+                    offerContent = `
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">Serenity Yoga & Mindfulness Retreats (For SS)</p>
+                            <p class="text-sm text-gray-300">"Find your inner sanctuary with retreats designed for deep calm and profound self-connection. Ideal for your grounded, introspective nature."</p>
+                            <p class="text-green-400 mt-2">Special Offer: 10% off your first retreat booking! <a href="#" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">"Authentic Connection Coaching" by DeepFlow Mentors (For SS)</p>
+                            <p class="text-sm text-gray-300">"Programs focusing on building genuine relationships and fostering emotional security, resonating with your core need for deep bonds."</p>
+                            <p class="text-green-400 mt-2">Special Offer: Free 30-min discovery call! <a href="#" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                    `;
+                    break;
+                case 'SD':
+                    offerContent = `
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">"Harmonic Leadership Workshops" by Balanced Growth Consultants (For SD)</p>
+                            <p class="text-sm text-gray-300">"Learn to lead with integrity and efficiency, fostering balanced outcomes in your projects and teams. Perfectly suited for Strategic Navigators."</p>
+                            <p class="text-green-400 mt-2">Special Offer: 15% off first workshop enrollment! <a href="#" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">"Pragmatic Wellness Plans" by Vitality Guides (For SD)</p>
+                            <p class="text-sm text-gray-300">"Achieve optimal well-being with practical, sustainable routines that fit your balanced lifestyle."</p>
+                            <p class="text-green-400 mt-2">Special Offer: Free 7-day trial of our meal planning app! <a href="#" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                    `;
+                    break;
+                case 'DS':
+                    offerContent = `
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">"Creative Sprint Coaching" by IdeaFlow Studios (For DS)</p>
+                            <p class="text-sm text-gray-300">"Accelerate your innovative thinking and bring your diverse ideas to life with focused, exciting coaching sessions. For Exploratory Innovators who love novelty."</p>
+                            <p class="text-green-400 mt-2">Special Offer: First session half price! <a href="#" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">"Global Travel & Cultural Immersion Packages" by Wanderlust Expeditions (For DS)</p>
+                            <p class="text-sm text-gray-300">"Curated adventures designed to spark your curiosity and offer unique intellectual and social experiences around the world."</p>
+                            <p class="text-green-400 mt-2">Special Offer: $200 off your first booking! <a href="#" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                    `;
+                    break;
+                case 'DD':
+                    offerContent = `
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">Zenith Coaching: Forge Your Path to Unstoppable Achievement (For DD)</p>
+                            <p class="text-sm text-gray-300">"This powerful program is designed for those who lead with passion and seek to manifest bold visions. Their direct, results-oriented style will resonate deeply with your core drive."</p>
+                            <p class="text-green-400 mt-2">Special Offer: 15% off your first consultation! <a href="https://zenithcoaching.com/deepsyke-offer" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-lg text-blue-300 font-medium">"High-Impact Executive Mentorship" by Apex Strategies (For DD)</p>
+                            <p class="text-sm text-gray-300">"Direct, results-focused mentorship to accelerate your leadership and achieve peak performance. Crafted for Dynamic Initiators."</p>
+                            <p class="text-green-400 mt-2">Special Offer: Free strategy session! <a href="#" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                        </div>
+                    `;
+                    break;
+                default:
+                    offerContent = `
+                        <p class="text-lg text-blue-300 font-medium">General Opportunities & Offers</p>
+                        <p class="text-sm text-gray-300">"Complete the Member Signup Survey to unlock exclusive offers tailored to your unique profile!"</p>
+                    `;
+                    break;
+            }
+
             resultsOutput.innerHTML = `
                 <h3 class="text-xl text-white font-semibold mb-3">Exclusive Opportunities Just For You</h3>
                 <p class="text-gray-300 mb-4">Businesses and practitioners in the DEEPSYKE network have tailored these offers to resonate with your unique profile. Explore what awaits!</p>
+                ${offerContent}
+                <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
+            `;
+            console.log("Exclusive Offers displayed for:", userZone);
+        }
+
+        function showAccountSettings() {
+            const resultsOutput = document.getElementById('resultsOutput');
+            const userZone = getUserAffinityZone();
+            const memberName = localStorage.getItem('memberName') || 'Valued Member';
+            const memberEmail = localStorage.getItem('memberEmail') || 'Not available';
+            const subscriptionPlan = localStorage.getItem('subscriptionPlan') || 'Not selected';
+
+
+            resultsOutput.innerHTML = `
+                <h3 class="text-xl text-white font-semibold mb-3">Your Account & Settings</h3>
+                <p class="text-gray-300 mb-4">Manage your DEEPSYKE profile and preferences here.</p>
                 <div class="mb-4">
-                    <p class="text-lg text-blue-300 font-medium">Zenith Coaching: Visionary Leadership Program</p>
-                    <p class="text-sm text-gray-300">"This powerful program is designed for those who lead with passion and seek to manifest bold visions. Their direct, results-oriented style will resonate deeply with your core drive."</p>
-                    <p class="text-green-400 mt-2">Special Offer: 15% off your first consultation! <a href="https://zenithcoaching.com/deepsyke-offer" target="_blank" class="text-blue-400 hover:underline">Claim Offer Here</a></p>
+                    <p class="text-lg text-blue-300 font-medium">Profile Information:</p>
+                    <p class="text-sm text-gray-300">Name: ${memberName}</p>
+                    <p class="text-sm text-gray-300">Email: ${memberEmail}</p>
+                    <p class="text-sm text-gray-300">Affinity Zone: ${userZone}</p>
+                    <p class="text-sm text-gray-300">Membership Plan: ${subscriptionPlan.charAt(0).toUpperCase() + subscriptionPlan.slice(1)}</p>
                 </div>
-                <div class="mb-4">
-                    <p class="text-lg text-blue-300 font-medium">"The Explorer's Retreat" - Patagonia Adventure</p>
-                    <p class="text-sm text-gray-300">"For the soul that craves novelty and intellectual challenge, this curated adventure offers unique insights i
+                <h4 class="text-lg text-white font-semibold mt-4 mb-3">Actions:</h4>
+                <ul class="list-disc list-inside text-gray-300 mb-4">
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to update profile details goes here.')">Update Profile Details</a></li>
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to change password goes here.')">Change Password</a></li>
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to upgrade/downgrade membership goes here.')">Manage Membership Plan</a></li>
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="localStorage.clear(); showMemberSignupPage(); alert('Your data has been cleared. You are logged out.');">Clear Data & Log Out (For Testing)</a></li>
+                </ul>
+                <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
+            `;
+
+            // Store memberName and memberEmail in localStorage for use in showAccountSettings
+            // (These are currently stored in a Formspree submission, but for client-side display consistency)
+            localStorage.setItem('memberName', memberName);
+            localStorage.setItem('memberEmail', memberEmail);
+            localStorage.setItem('subscriptionPlan', subscriptionPlan);
+
+            console.log("Account Settings displayed for:", userZone);
+        }
+
+    </script>
+</body>
+</html>
