@@ -56,7 +56,8 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
-        .form-section {
+        .page-section {
+            display: none; /* All sections hidden by default, controlled by JS */
             margin-bottom: 20px;
         }
         .form-group {
@@ -137,12 +138,20 @@
             transform: translateY(0);
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
         }
-        .toggle-btn {
-            background-color: #4a5568; /* Dark gray for toggle */
-            box-shadow: none;
-            margin-bottom: 20px;
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
         }
-        .toggle-btn:hover {
+        .nav-buttons button {
+            width: calc(50% - 7.5px); /* Two columns */
+            min-width: 180px; /* Ensure buttons don't get too small */
+            background-color: #4a5568; /* Dark gray for navigation */
+            box-shadow: none;
+        }
+        .nav-buttons button:hover {
             background-color: #2d3748;
             box-shadow: none;
         }
@@ -192,21 +201,26 @@
                 width: 100%; /* Single column on small screens */
             }
         }
-        .action-buttons {
+        .subscription-options {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            border: 1px solid #3a3a3a;
+        }
+        .subscription-option {
+            margin-bottom: 15px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
+            align-items: center;
         }
-        .action-buttons button {
-            width: calc(50% - 7.5px); /* Two columns */
-            min-width: 180px; /* Ensure buttons don't get too small */
+        .subscription-option input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
         }
-        @media (max-width: 640px) {
-            .action-buttons button {
-                width: 100%; /* Single column on small screens */
-            }
+        .subscription-option label {
+            margin-bottom: 0;
+            font-weight: 500;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -238,134 +252,122 @@
         <h1>The Hyper-Personalized Search & Opportunity Engine</h1>
 
         <div class="form-section">
-            <!-- Mode Toggle Buttons -->
-            <div class="action-buttons">
-                <button class="toggle-btn" onclick="toggleMemberMode()">Member Area</button>
-                <button class="toggle-btn" onclick="activateBusinessMode()">For Businesses</button>
+            <!-- Global Navigation Buttons -->
+            <div class="nav-buttons">
+                <button onclick="showMemberSignupPage()">Member Signup</button>
+                <button onclick="showMemberUIPage()">Member Area</button>
+                <button onclick="showBusinessSignupPage()">Business Signup</button>
+                <button onclick="showBusinessUIPage()">Business Area</button>
+                <button onclick="showAdminUIPage()">Admin Area</button>
             </div>
 
-            <!-- Member Search & Survey Section -->
-            <div id="memberModeSection">
-                <h2 class="text-xl text-white font-semibold mb-4">Search for Personalized Opportunities</h2>
-                <div class="search-bar-group">
-                    <label for="memberSearchQuery">What are you looking for?</label>
-                    <input type="text" id="memberSearchQuery" placeholder="e.g., 'career advice', 'travel ideas', 'new hobbies'">
-                </div>
-                <button onclick="performMemberSearch()">Search</button>
+            <!-- 1. Member Signup Page (Initial entry for new members) -->
+            <div id="memberSignupPage" class="page-section">
+                <h2 class="text-xl text-white font-semibold mb-4">Join DEEPSYKE: Unlock Your Personalized World</h2>
+                <form id="memberSurveyForm" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_HASH" method="POST">
+                    <div class="form-group">
+                        <label for="memberName">Your Name:</label>
+                        <input type="text" id="memberName" name="name" placeholder="e.g., Jane Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memberEmail">Your Email:</label>
+                        <input type="email" id="memberEmail" name="email" placeholder="e.g., jane.doe@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memberCountry">Your Country:</label>
+                        <input type="text" id="memberCountry" name="country" placeholder="e.g., Australia" required>
+                    </div>
 
-                <hr class="my-8 border-gray-700" id="surveySeparator"> <!-- Separator -->
-
-                <div id="memberSurveyContent">
-                    <h2 class="text-xl text-white font-semibold mb-4">Member Survey: Share Your Insights for Personalized Opportunities</h2>
-                    <!-- Formspree Integration: Replace YOUR_FORMSPREE_FORM_HASH with your actual hash -->
-                    <form id="memberSurveyForm" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_HASH" method="POST">
-                        <div class="form-group">
-                            <label for="memberName">Your Name:</label>
-                            <input type="text" id="memberName" name="name" placeholder="e.g., Jane Doe" required>
+                    <h3 class="text-lg text-white font-semibold mb-4">Instructions: Please choose the option that best describes you for each question.</h3>
+                    <!-- Survey Questions (Q1-Q20) - These are the same as before -->
+                    <div class="survey-question">
+                        <p>1. When starting something new, my main focus is usually on:</p>
+                        <div class="option">
+                            <input type="radio" id="q1a" name="q1_focus" value="SS" required>
+                            <label for="q1a">a) Thinking deeply about the long-term effects and making sure everything is stable and secure. I like to process information thoroughly to avoid problems down the road.</label>
                         </div>
-                        <div class="form-group">
-                            <label for="memberEmail">Your Email:</label>
-                            <input type="email" id="memberEmail" name="email" placeholder="e.g., jane.doe@example.com" required>
+                        <div class="option">
+                            <input type="radio" id="q1b" name="q1_focus" value="SD">
+                            <label for="q1b">b) Planning the most balanced and effective way to get things done. I aim for practical solutions that keep things running smoothly.</label>
                         </div>
-                        <div class="form-group">
-                            <label for="memberCountry">Your Country:</label>
-                            <input type="text" id="memberCountry" name="country" placeholder="e.g., Australia" required>
+                        <div class="option">
+                            <input type="radio" id="q1c" name="q1_focus" value="DS">
+                            <label for="q1c">c) Coming up with lots of fresh ideas and exploring exciting new possibilities. I love to kick off different projects and imagine what could be.</label>
                         </div>
-
-                        <h3 class="text-lg text-white font-semibold mb-4">Instructions: Please choose the option that best describes you for each question.</h3>
-
-                        <div class="survey-question">
-                            <p>1. When starting something new, my main focus is usually on:</p>
-                            <div class="option">
-                                <input type="radio" id="q1a" name="q1_focus" value="SS" required>
-                                <label for="q1a">a) Thinking deeply about the long-term effects and making sure everything is stable and secure. I like to process information thoroughly to avoid problems down the road.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q1b" name="q1_focus" value="SD">
-                                <label for="q1b">b) Planning the most balanced and effective way to get things done. I aim for practical solutions that keep things running smoothly.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q1c" name="q1_focus" value="DS">
-                                <label for="q1c">c) Coming up with lots of fresh ideas and exploring exciting new possibilities. I love to kick off different projects and imagine what could be.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q1d" name="q1_focus" value="DD">
-                                <label for="q1d">d) Jumping in and taking quick, firm action to get clear results. I thrive on moving forward and seeing concrete achievements.</label>
-                            </div>
+                        <div class="option">
+                            <input type="radio" id="q1d" name="q1_focus" value="DD">
+                            <label for="q1d">d) Jumping in and taking quick, firm action to get clear results. I thrive on moving forward and seeing concrete achievements.</label>
                         </div>
-
-                        <div class="survey-question">
-                            <p>2. In social situations, I feel most comfortable when:</p>
-                            <div class="option">
-                                <input type="radio" id="q2a" name="q2_social" value="SS" required>
-                                <label for="q2a">a) Having deep, meaningful conversations with a few close people. I prefer real connections over just small talk.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q2b" name="q2_social" value="SD">
-                                <label for="q2b">b) Being a friendly and helpful presence, making sure everyone gets along. I enjoy balancing the mood and assisting others.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q2c" name="q2_social" value="DS">
-                                <label for="q2c">c) Leading fun, clever conversations and talking about many interesting topics. I love to be playful and get people thinking.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q2d" name="q2_social" value="DD">
-                                <label for="q2d">d) Taking charge and guiding the conversation towards a clear point or decision. I naturally like to lead and make an impact.</label>
-                            </div>
+                    </div>
+                    <div class="survey-question">
+                        <p>2. In social situations, I feel most comfortable when:</p>
+                        <div class="option">
+                            <input type="radio" id="q2a" name="q2_social" value="SS" required>
+                            <label for="q2a">a) Having deep, meaningful conversations with a few close people. I prefer real connections over just small talk.</label>
                         </div>
-
-                        <div class="survey-question">
-                            <p>3. The quality I find most appealing in others is their:</p>
-                            <div class="option">
-                                <input type="radio" id="q3a" name="q3_appealing_quality" value="SS" required>
-                                <label for="q3a">a) Genuineness, deep understanding, and ability to make me feel secure. I value true connections and profound insights.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q3b" name="q3_appealing_quality" value="SD">
-                                <label for="q3b">b) Balanced approach, practical mindset, and ability to plan well. I appreciate people who are dependable and can handle situations effectively.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q3c" name="q3_appealing_quality" value="DS" required>
-                                <label for="q3c">c) Quick wit, curiosity, and charming personality. I'm drawn to people who make me think and are engaging.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q3d" name="q3_appealing_quality" value="DD">
-                                <label for="q3d">d) Confidence, strong drive, and straightforwardness. I admire those who are clear, strong, and focused on getting results.</label>
-                            </div>
+                        <div class="option">
+                            <input type="radio" id="q2b" name="q2_social" value="SD">
+                            <label for="q2b">b) Being a friendly and helpful presence, making sure everyone gets along. I enjoy balancing the mood and assisting others.</label>
                         </div>
-
-                        <div class="survey-question">
-                            <p>4. My biggest personal challenge often involves:</p>
-                            <div class="option">
-                                <input type="radio" id="q4a" name="q4_challenge" value="SS" required>
-                                <label for="q4a">a) Thinking too much, worrying, or dealing with anxiety. My mind can get stuck in negative loops, making it hard to feel free.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q4b" name="q4_challenge" value="SD">
-                                <label for="q4b">b) Feeling disappointed when things don't go as planned, or putting others' needs before my own. I might neglect myself while trying to keep things balanced or help.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q4c" name="q4_challenge" value="DS" required>
-                                <label for="q4c">c) Starting many projects but finding it hard to finish them, or feeling scattered. My love for new things can make it tough to stick with one thing.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q4d" name="q4_challenge" value="DD">
-                                <label for="q4d">d) Being seen as stubborn, impatient, or too focused on outcomes. My directness and drive can sometimes seem unyielding.</label>
-                            </div>
+                        <div class="option">
+                            <input type="radio" id="q2c" name="q2_social" value="DS">
+                            <label for="q2c">c) Leading fun, clever conversations and talking about many interesting topics. I love to be playful and get people thinking.</label>
                         </div>
-
-                        <div class="survey-question">
-                            <p>5. When I think about the past, I usually:</p>
-                            <div class="option">
-                                <input type="radio" id="q5a" name="q5_past" value="SS" required>
-                                <label for="q5a">a) Look for deep lessons and understand how events connect to my inner self. I search for profound meaning and how things fit together over time.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q5b" name="q5_past" value="SD">
-                                <label for="q5b">b) Use past experiences to shape my future plans, then move on. I use what I've learned in a practical way to improve for tomorrow.</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" id="q5c" name="q5_past" value="DS" required>
+                        <div class="option">
+                            <input type="radio" id="q2d" name="q2_social" value="DD">
+                            <label for="q2d">d) Taking charge and guiding the conversation towards a clear point or decision. I naturally like to lead and make an impact.</label>
+                        </div>
+                    </div>
+                    <div class="survey-question">
+                        <p>3. The quality I find most appealing in others is their:</p>
+                        <div class="option">
+                            <input type="radio" id="q3a" name="q3_appealing_quality" value="SS" required>
+                            <label for="q3a">a) Genuineness, deep understanding, and ability to make me feel secure. I value true connections and profound insights.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3b" name="q3_appealing_quality" value="SD">
+                            <label for="q3b">b) Balanced approach, practical mindset, and ability to plan well. I appreciate people who are dependable and can handle situations effectively.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3c" name="q3_appealing_quality" value="DS" required>
+                            <label for="q3c">c) Quick wit, curiosity, and charming personality. I'm drawn to people who make me think and are engaging.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3d" name="q3_appealing_quality" value="DD">
+                            <label for="q3d">d) Confidence, strong drive, and straightforwardness. I admire those who are clear, strong, and focused on getting results.</label>
+                        </div>
+                    </div>
+                    <div class="survey-question">
+                        <p>4. My biggest personal challenge often involves:</p>
+                        <div class="option">
+                            <input type="radio" id="q4a" name="q4_challenge" value="SS" required>
+                            <label for="q4a">a) Thinking too much, worrying, or dealing with anxiety. My mind can get stuck in negative loops, making it hard to feel free.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4b" name="q4_challenge" value="SD">
+                            <label for="q4b">b) Feeling disappointed when things don't go as planned, or putting others' needs before my own. I might neglect myself while trying to keep things balanced or help.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4c" name="q4_challenge" value="DS" required>
+                            <label for="q4c">c) Starting many projects but finding it hard to finish them, or feeling scattered. My love for new things can make it tough to stick with one thing.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4d" name="q4_challenge" value="DD">
+                            <label for="q4d">d) Being seen as stubborn, impatient, or too focused on outcomes. My directness and drive can sometimes seem unyielding.</label>
+                        </div>
+                    </div>
+                    <div class="survey-question">
+                        <p>5. When I think about the past, I usually:</p>
+                        <div class="option">
+                            <input type="radio" id="q5a" name="q5_past" value="SS" required>
+                            <label for="q5a">a) Look for deep lessons and understand how events connect to my inner self. I search for profound meaning and how things fit together over time.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5b" name="q5_past" value="SD">
+                            <label for="q5b">b) Use past experiences to shape my future plans, then move on. I use what I've learned in a practical way to improve for tomorrow.</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5c" name="q5_past" value="DS" required>
                             <label for="q5c">c) Explore new ideas or different ways of looking at past events. I'm curious about fresh interpretations and possibilities.</label>
                         </div>
                         <div class="option">
@@ -373,7 +375,6 @@
                             <label for="q5d">d) Focus on how past successes or failures can push me towards future goals. I see the past as a stepping stone for what's next.</label>
                         </div>
                     </div>
-
                     <div class="survey-question">
                         <p>6. When I set a goal, my usual way of reaching it is:</p>
                         <div class="option">
@@ -674,14 +675,43 @@
                             </div>
                         </div>
 
-                        <button type="submit">Submit Survey & Get Personalized Insights</button>
+                        <div class="subscription-options">
+                            <h3 class="text-lg text-white font-semibold mb-3">Choose Your Membership:</h3>
+                            <div class="subscription-option">
+                                <input type="radio" id="subBasic" name="subscription" value="basic" required>
+                                <label for="subBasic">$19.95 / month (30 searches/reports)</label>
+                            </div>
+                            <div class="subscription-option">
+                                <input type="radio" id="subPremium" name="subscription" value="premium">
+                                <label for="subPremium">$59.95 / month (Unlimited searches/reports/offers)</label>
+                            </div>
+                            <button type="submit" onclick="handleMemberSignup()">Proceed to Payment (Placeholder)</button>
+                        </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Admin/Business Profile Section (Hidden by default) -->
-            <div id="adminModeSection" class="hidden">
-                <h2 class="text-xl text-white font-semibold mb-4">Submit Business/Practitioner Profile</h2>
+            <!-- 2. Member UI Page (Post-Survey) -->
+            <div id="memberUIPage" class="page-section">
+                <h2 class="text-xl text-white font-semibold mb-4">Your Personalized DEEPSYKE Experience</h2>
+                <div class="search-bar-group">
+                    <label for="memberSearchQueryUI">What are you looking for?</label>
+                    <input type="text" id="memberSearchQueryUI" placeholder="e.g., 'career advice', 'travel ideas', 'new hobbies'">
+                </div>
+                <button onclick="performMemberSearch()">Search</button>
+
+                <hr class="my-8 border-gray-700">
+
+                <div class="action-buttons">
+                    <button onclick="showPersonalReport()">My Personalized Report</button>
+                    <button onclick="showExclusiveOffers()">Exclusive Opportunities</button>
+                    <button onclick="showAccountSettings()">Account & Settings</button>
+                </div>
+            </div>
+
+            <!-- 3. Business Signup Page -->
+            <div id="businessSignupPage" class="page-section">
+                <h2 class="text-xl text-white font-semibold mb-4">Join DEEPSYKE as a Business/Practitioner</h2>
                 <form id="businessProfileForm" action="https://formspree.io/f/YOUR_FORMSPREE_ADMIN_HASH" method="POST">
                     <div class="form-group">
                         <label for="businessName">Business/Practitioner Name:</label>
@@ -718,16 +748,50 @@
                     </div>
                     <button type="submit">Submit Profile</button>
                 </form>
+                <button onclick="showBusinessUIPage()" class="mt-4 toggle-btn">Go to Business Area</button>
+            </div>
+
+            <!-- 4. Business UI Page -->
+            <div id="businessUIPage" class="page-section">
+                <h2 class="text-xl text-white font-semibold mb-4">Business Dashboard</h2>
+                <p class="text-gray-300 mb-4">Welcome, Business User! Manage your profile, offers, and member engagement here.</p>
+                <div class="action-buttons">
+                    <button onclick="alert('View/Edit Profile functionality here')">View/Edit My Profile</button>
+                    <button onclick="alert('Manage Offers functionality here')">Manage My Offers</button>
+                    <button onclick="alert('View Member Feedback functionality here')">View Member Feedback</button>
+                </div>
+            </div>
+
+            <!-- 5. Admin UI Page -->
+            <div id="adminUIPage" class="page-section">
+                <h2 class="text-xl text-white font-semibold mb-4">Admin Control Panel</h2>
+                <p class="text-gray-300 mb-4">Welcome, Admin! Manage members, businesses, and system data.</p>
+                <div class="action-buttons">
+                    <button onclick="alert('Manage Members functionality here')">Manage Members</button>
+                    <button onclick="alert('Manage Businesses functionality here')">Manage Businesses</button>
+                    <button onclick="alert('View Analytics functionality here')">View Analytics</button>
+                    <button onclick="alert('Feed Database functionality here')">Feed Database</button>
+                </div>
             </div>
         </div>
 
         <div id="resultsOutput" class="results-area">
             <!-- Search results or submission confirmations will appear here -->
-            <p class="text-center text-gray-400">Search for opportunities or complete the survey to get your personalized insights.</p>
+            <p class="text-center text-gray-400">Welcome to DEEPSYKE. Please select an option above.</p>
         </div>
     </div>
 
     <script>
+        // Function to show a specific page section and hide others
+        function showPage(pageId) {
+            const pages = ['memberSignupPage', 'memberUIPage', 'businessSignupPage', 'businessUIPage', 'adminUIPage'];
+            pages.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Welcome to DEEPSYKE. Please select an option above.</p>'; // Clear results area on page switch
+        }
+
         // Function to check if survey is completed (simulated with localStorage)
         function checkSurveyStatus() {
             return localStorage.getItem('deepsyke_survey_completed') === 'true';
@@ -738,37 +802,52 @@
             localStorage.setItem('deepsyke_survey_completed', 'true');
         }
 
+        // Navigation functions
+        function showMemberSignupPage() {
+            showPage('memberSignupPage');
+            document.getElementById('surveySeparator').classList.remove('hidden'); // Ensure separator is visible for signup
+            document.getElementById('memberSurveyContent').classList.remove('hidden'); // Ensure survey is visible
+            document.getElementById('memberName').focus(); // Focus on name field
+        }
+
+        function showMemberUIPage() {
+            showPage('memberUIPage');
+            document.getElementById('memberSearchQueryUI').focus(); // Focus on search bar for member UI
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Enter your query to find personalized opportunities.</p>';
+        }
+
+        function showBusinessSignupPage() {
+            showPage('businessSignupPage');
+            document.getElementById('businessName').focus(); // Focus on business name field
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Submit business profiles here.</p>';
+        }
+
+        function showBusinessUIPage() {
+            showPage('businessUIPage');
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Manage your business details.</p>';
+        }
+
+        function showAdminUIPage() {
+            showPage('adminUIPage');
+            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Admin actions and insights.</p>';
+        }
+
+
         // Initial UI setup on page load
         window.onload = () => {
-            // Default to member mode on load
-            document.getElementById('memberModeSection').classList.remove('hidden');
-            document.getElementById('adminModeSection').classList.add('hidden');
-
             if (checkSurveyStatus()) {
-                // If survey is completed, hide survey, show search and action buttons
-                document.getElementById('memberSurveyContent').classList.add('hidden');
-                document.getElementById('surveySeparator').classList.add('hidden');
-                document.getElementById('memberSearchQuery').focus(); // Focus on search bar
-                // Display initial instructions for search
-                document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Enter your query to find personalized opportunities.</p>';
+                showMemberUIPage(); // If survey completed, go straight to member UI
             } else {
-                // If survey not completed, ensure survey is visible
-                document.getElementById('memberSurveyContent').classList.remove('hidden');
-                document.getElementById('surveySeparator').classList.remove('hidden');
-                document.getElementById('memberName').focus(); // Focus on name field
-                document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Complete the survey to get your personalized insights.</p>';
+                showMemberSignupPage(); // Otherwise, start at signup
             }
         };
 
         document.getElementById('memberSurveyForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent default form submission to handle via JS
             await submitMemberSurvey();
-            // After successful survey submission, update UI to show only search and actions
-            if (checkSurveyStatus()) { // Re-check status after submission
-                document.getElementById('memberSurveyContent').classList.add('hidden');
-                document.getElementById('surveySeparator').classList.add('hidden');
-                document.getElementById('memberSearchQuery').focus();
-                document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Your insights are being processed! Now, try searching for opportunities.</p>';
+            // After successful survey submission, transition to Member UI
+            if (checkSurveyStatus()) {
+                showMemberUIPage();
             }
         });
 
@@ -777,29 +856,8 @@
             submitBusinessProfile();
         });
 
-        function toggleMemberMode() {
-            document.getElementById('memberModeSection').classList.remove('hidden');
-            document.getElementById('adminModeSection').classList.add('hidden');
-            // Reset member UI state based on survey completion
-            if (checkSurveyStatus()) {
-                document.getElementById('memberSurveyContent').classList.add('hidden');
-                document.getElementById('surveySeparator').classList.add('hidden');
-                document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Enter your query to find personalized opportunities.</p>';
-            } else {
-                document.getElementById('memberSurveyContent').classList.remove('hidden');
-                document.getElementById('surveySeparator').classList.remove('hidden');
-                document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Complete the survey to get your personalized insights.</p>';
-            }
-        }
-
-        function activateBusinessMode() {
-            document.getElementById('memberModeSection').classList.add('hidden');
-            document.getElementById('adminModeSection').classList.remove('hidden');
-            document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Submit business profiles here.</p>';
-        }
-
         function performMemberSearch() {
-            const query = document.getElementById('memberSearchQuery').value;
+            const query = document.getElementById('memberSearchQueryUI').value; // Changed ID to match member UI search bar
             const resultsOutput = document.getElementById('resultsOutput');
 
             if (!query.trim()) {
@@ -823,14 +881,6 @@
                         <p class="text-sm text-gray-300">"It's not procrastination to not finish a task. Maybe it's just we are too refined for our own good. This workshop series celebrates the exploratory journey, offering tools to find joy in the process, not just the destination."</p>
                     </div>
                     <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
-                    
-                    <hr class="my-8 border-gray-700">
-
-                    <div class="action-buttons">
-                        <button onclick="showPersonalReport()">My Personalized Report</button>
-                        <button onclick="showExclusiveOffers()">Exclusive Opportunities</button>
-                        <button onclick="showAccountSettings()">Account & Settings</button>
-                    </div>
                 `;
                 console.log("Placeholder search results displayed.");
             }, 2000);
@@ -864,15 +914,25 @@
                 return;
             }
 
-            resultsOutput.innerHTML = `<p class="text-blue-300">Submitting your survey, ${memberName}. Please wait...</p>`;
+            // Check if a subscription option is selected
+            const selectedSubscription = document.querySelector('input[name="subscription"]:checked');
+            if (!selectedSubscription) {
+                resultsOutput.innerHTML = '<p class="text-red-400">Please select a subscription plan.</p>';
+                return;
+            }
+            const subscriptionPlan = selectedSubscription.value;
+
+
+            resultsOutput.innerHTML = `<p class="text-blue-300">Submitting your survey and processing payment for ${subscriptionPlan} plan, ${memberName}. Please wait...</p>`;
             console.log("Member Survey Submission Data:", {
                 memberName,
                 memberEmail,
                 memberCountry,
-                surveyResponses
+                surveyResponses,
+                subscriptionPlan
             });
 
-            // --- Formspree Submission ---
+            // --- Formspree Submission (for survey data) ---
             const form = document.getElementById('memberSurveyForm');
             const formData = new FormData(form);
 
@@ -887,9 +947,9 @@
 
                 if (response.ok) {
                     resultsOutput.innerHTML = `
-                        <h3 class="text-xl text-white font-semibold mb-3">Survey Submitted!</h3>
-                        <p class="text-green-400">Thank you, ${memberName}! Your responses have been recorded and sent to us. We will process your insights and begin personalizing your DEEPSYKE experience.</p>
-                        <p class="text-gray-400 mt-4">Now, try searching for opportunities or explore your personalized sections below.</p>
+                        <h3 class="text-xl text-white font-semibold mb-3">Survey & Subscription Submitted!</h3>
+                        <p class="text-green-400">Thank you, ${memberName}! Your responses and payment for the ${subscriptionPlan} plan have been processed. We will begin personalizing your DEEPSYKE experience.</p>
+                        <p class="text-gray-400 mt-4">You can now explore your personalized sections.</p>
                     `;
                     setSurveyCompleted(); // Mark survey as completed
                     form.reset(); // Resets all form fields
@@ -909,7 +969,7 @@
             const businessName = document.getElementById('businessName').value;
             const serviceDescription = document.getElementById('serviceDescription').value;
             const specialOffer = document.getElementById('specialOffer').value;
-            const selectedAffinityZones = Array.from(document.querySelectorAll('#adminModeSection .affinity-checkboxes input[type="checkbox"]:checked'))
+            const selectedAffinityZones = Array.from(document.querySelectorAll('#businessProfileForm .affinity-checkboxes input[type="checkbox"]:checked'))
                                                 .map(cb => cb.value);
             const resultsOutput = document.getElementById('resultsOutput');
 
@@ -995,42 +1055,4 @@
                 </div>
                 <div class="mb-4">
                     <p class="text-lg text-blue-300 font-medium">"The Explorer's Retreat" - Patagonia Adventure</p>
-                    <p class="text-sm text-gray-300">"For the soul that craves novelty and intellectual challenge, this curated adventure offers unique insights into uncharted territories. Embrace the thrill of discovery."</p>
-                    <p class="text-green-400 mt-2">Special Offer: Free gear checklist and planning guide! <a href="https://explorerretreats.com/deepsyke-patagonia" target="_blank" class="text-blue-400 hover:underline">Learn More</a></p>
-                </div>
-                <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Were these offers relevant?</a></p>
-            `;
-            console.log("Exclusive Offers displayed.");
-        }
-
-        function showAccountSettings() {
-            const resultsOutput = document.getElementById('resultsOutput');
-            resultsOutput.innerHTML = `
-                <h3 class="text-xl text-white font-semibold mb-3">Your Account & Settings</h3>
-                <p class="text-gray-300 mb-4">Manage your DEEPSYKE membership, preferences, and history.</p>
-                <ul class="list-disc list-inside text-gray-300 mb-4">
-                    <li>Email: <span class="text-blue-300">your.email@example.com</span> <a href="#" class="text-blue-400 hover:underline text-sm ml-2">Edit</a></li>
-                    <li>Subscription: <span class="text-blue-300">Premium Member</span> <a href="#" class="text-blue-400 hover:underline text-sm ml-2">Upgrade/Cancel</a></li>
-                    <li>Payment Info: <span class="text-blue-300">**** **** **** 1234</span> <a href="#" class="text-blue-400 hover:underline text-sm ml-2">Update</a></li>
-                    <li>Search History: <a href="#" class="text-blue-400 hover:underline text-sm ml-2">View Past Searches</a></li>
-                    <li>Invoices: <a href="#" class="text-blue-400 hover:underline text-sm ml-2">Download Invoices</a></li>
-                </ul>
-                <p class="text-gray-400 mt-4">Need support? <a href="#" class="text-blue-400 hover:underline">Contact Us</a></p>
-            `;
-            console.log("Account Settings displayed.");
-        }
-
-        // Helper function to get consistent name for radio buttons
-        function getQuestionName(qNum) {
-            const names = {
-                1: 'focus', 2: 'social', 3: 'appealing_quality', 4: 'challenge', 5: 'past',
-                6: 'goal_reaching', 7: 'life_desire', 8: 'others_see_you', 9: 'connecting',
-                10: 'communication_response', 11: 'personal_space', 12: 'decision',
-                13: 'free_time', 14: 'upset_response', 15: 'new_info', 16: 'pressure',
-                17: 'pitch', 18: 'new_vs_old', 19: 'passions', 20: 'politics'
-            };
-            return names[qNum] || 'unknown';
-        }
-    </script>
-</body>
-</html>
+                    <p class="text-sm text-gray-300">"For the soul that craves novelty and intellectual challenge, this curated adventure offers unique insights i
