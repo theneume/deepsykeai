@@ -324,7 +324,7 @@
                             <label for="q2b">b) Being a friendly and helpful presence, making sure everyone gets along. I enjoy balancing the mood and assisting others.</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q2c" name="q2_social" value="DS">
+                            <input type="radio" id="q2c" name="q2_social" value="DS" required>
                             <label for="q2c">c) Leading fun, clever conversations and talking about many interesting topics. I love to be playful and get people thinking.</label>
                         </div>
                         <div class="option">
@@ -834,23 +834,23 @@
             return localStorage.getItem('deepsyke_user_affinity_zone') || 'UNKNOWN';
         }
 
-        // Navigation functions
+        // Navigation functions (explicitly call showPage)
         function showMemberSignupPage() {
             showPage('memberSignupPage');
-            document.getElementById('memberName').focus(); // Focus on name field
+            document.getElementById('memberName').focus();
             document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Complete the survey to unlock your personalized DEEPSYKE experience.</p>';
         }
 
         function showMemberUIPage() {
             showPage('memberUIPage');
-            document.getElementById('memberSearchQueryUI').focus(); // Focus on search bar for member UI
+            document.getElementById('memberSearchQueryUI').focus();
             const userZone = getUserAffinityZone();
             document.getElementById('resultsOutput').innerHTML = `<p class="text-center text-gray-400">Welcome back! Your current Affinity Zone is: <span class="text-blue-300 font-semibold">${userZone}</span>. Enter your query to find personalized opportunities.</p>`;
         }
 
         function showBusinessSignupPage() {
             showPage('businessSignupPage');
-            document.getElementById('businessName').focus(); // Focus on business name field
+            document.getElementById('businessName').focus();
             document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Submit business profiles here to connect with hyper-personalized members.</p>';
         }
 
@@ -864,13 +864,16 @@
             document.getElementById('resultsOutput').innerHTML = '<p class="text-center text-gray-400">Admin actions and insights for system oversight.</p>';
         }
 
-        // Initial UI setup on page load
+        // Initial UI setup on page load with a slight delay
         window.onload = () => {
-            if (checkSurveyStatus()) {
-                showMemberUIPage(); // If survey completed, go straight to member UI
-            } else {
-                showMemberSignupPage(); // Otherwise, start at signup
-            }
+            // Added a small timeout to ensure DOM is fully ready, especially in different environments
+            setTimeout(() => {
+                if (checkSurveyStatus()) {
+                    showMemberUIPage(); // If survey completed, go straight to member UI
+                } else {
+                    showMemberSignupPage(); // Otherwise, start at signup
+                }
+            }, 100); // 100ms delay
         };
 
         // --- Core Affinity Zone Calculation Logic ---
@@ -903,7 +906,6 @@
             } else if (tiedZones.length > 1) {
                 // Handle ties: For simplicity, if multiple zones are tied,
                 // we'll return a concatenated string (e.g., "SS/SD")
-                // In a real system, more sophisticated tie-breaking logic or a blended profile might be used.
                 return tiedZones.sort().join('/');
             }
             return 'UNKNOWN'; // No responses or all zeros
@@ -992,6 +994,7 @@
                     `;
                     setSurveyCompleted(userAffinityZone); // Mark survey as completed and store zone
                     form.reset(); // Resets all form fields
+                    showMemberUIPage(); // **FIXED: Transition to Member UI after successful submission**
                 } else {
                     const errorData = await response.json();
                     resultsOutput.innerHTML = `<p class="text-red-400">Error submitting survey: ${errorData.errors ? errorData.errors.map(e => e.message).join(', ') : 'Unknown error'}</p>`;
@@ -1078,7 +1081,7 @@
                 return;
             }
 
-            resultsOutput.innerHTML = `<div class="loader"></div> <span class="loading-text text-blue-300">Searching for hyper-personalized opportunities for a ${userZone} related to "${query}"...</span>`;
+            resultsOutput.innerHTML = `<div class="loader"></div> <span class="loading-text text-blue-300">Searching for hyper-personalized opportunities for a ${userZone} related to "${query}" and other insights...</span>`;
             console.log(`Member search query: "${query}" for Affinity Zone: ${userZone}`);
 
             // Placeholder for future backend call to Lambda/Gemini
@@ -1093,6 +1096,10 @@
                                 <p class="text-lg text-blue-300 font-medium">"Ethical Investment Strategies" - From 'The Conscious Investor'</p>
                                 <p class="text-sm text-gray-300">"Align your financial decisions with your deepest values. Ideal for SS types seeking long-term security and genuine impact."</p>
                             </div>
+                            <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"Serotonin-Boosting Nutrition Guide for Calm & Focus"</p>
+                                <p class="text-sm text-gray-300">"Discover foods and habits that naturally support your serene SS nature."</p>
+                            </div>
                         `;
                         break;
                     case 'SD':
@@ -1102,6 +1109,10 @@
                             <div class="mb-4">
                                 <p class="text-lg text-blue-300 font-medium">"Community Building & Collaboration Tools" - From 'Harmony Hub'</p>
                                 <p class="text-sm text-gray-300">"Discover resources for fostering strong, balanced relationships and practical teamwork, resonating with your natural SD inclinations."</p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"Mindful Productivity Techniques for Balanced Success"</p>
+                                <p class="text-sm text-gray-300">"Learn how to blend focus and calm to achieve your goals gracefully."</p>
                             </div>
                         `;
                         break;
@@ -1113,19 +1124,27 @@
                                 <p class="text-lg text-blue-300 font-medium">"The Art of Not Finishing" - A Workshop Series</p>
                                 <p class="text-sm text-gray-300">"It's not procrastination to not finish a task. Maybe it's just we are too refined for our own good. This workshop series celebrates the exploratory journey, offering tools to find joy in the process, not just the destination."</p>
                             </div>
+                             <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"Dopamine Management: Channeling Your Creative Burst"</p>
+                                <p class="text-sm text-gray-300">"Techniques to help DS types maintain focus and complete projects after the initial burst of inspiration."</p>
+                            </div>
                         `;
                         break;
                     case 'DD':
                         dynamicContent = `
-                            <p class="text-lg text-blue-300 font-medium">"Zenith Coaching: Forge Your Path to Unstoppable Achievement" - Curated for DD</p>
+                            <p class="text-lg text-blue-300 font-medium">Zenith Coaching: Forge Your Path to Unstoppable Achievement (For DD)</p>
                             <p class="text-sm text-gray-300">"This powerful program is designed for those who lead with passion and seek to manifest bold visions. Their direct, results-oriented style will resonate deeply with your core drive as a Dynamic Initiator."</p>
                             <div class="mb-4">
                                 <p class="text-lg text-blue-300 font-medium">"High-Impact Strategies for Rapid Results" - From 'The Accelerator Blueprint'</p>
                                 <p class="text-sm text-gray-300">"Tools and techniques for maximizing efficiency and achieving concrete outcomes, perfectly suited for your DD drive."</p>
                             </div>
+                            <div class="mb-4">
+                                <p class="text-lg text-blue-300 font-medium">"Cultivating Calm: Serotonin Support for High Achievers"</p>
+                                <p class="text-sm text-gray-300">"Strategies for DD types to integrate moments of stillness and reduce burnout, enhancing long-term success."</p>
+                            </div>
                         `;
                         break;
-                    default:
+                    default: // For UNKNOWN or tied zones
                         dynamicContent = `
                             <p class="text-lg text-blue-300 font-medium">General Opportunities for "${query}"</p>
                             <p class="text-sm text-gray-300">"Discover a range of options related to your query. Complete our survey for truly personalized results!"</p>
@@ -1196,7 +1215,7 @@
                         </ul>
                     `;
                     break;
-                default:
+                default: // For UNKNOWN or tied zones
                     reportContent = `
                         <p class="text-lg text-blue-300 font-medium">Your Personalized Report</p>
                         <p class="text-sm text-gray-300">"Complete the Member Signup Survey to unlock your unique Affinity Zone report and discover tailored insights for your personal growth!"</p>
@@ -1275,7 +1294,7 @@
                         </div>
                     `;
                     break;
-                default:
+                default: // For UNKNOWN or tied zones
                     offerContent = `
                         <p class="text-lg text-blue-300 font-medium">General Opportunities & Offers</p>
                         <p class="text-sm text-gray-300">"Complete the Member Signup Survey to unlock exclusive offers tailored to your unique profile!"</p>
@@ -1295,10 +1314,10 @@
         function showAccountSettings() {
             const resultsOutput = document.getElementById('resultsOutput');
             const userZone = getUserAffinityZone();
+            // Retrieve values from localStorage to persist them across page reloads/sessions
             const memberName = localStorage.getItem('memberName') || 'Valued Member';
             const memberEmail = localStorage.getItem('memberEmail') || 'Not available';
             const subscriptionPlan = localStorage.getItem('subscriptionPlan') || 'Not selected';
-
 
             resultsOutput.innerHTML = `
                 <h3 class="text-xl text-white font-semibold mb-3">Your Account & Settings</h3>
@@ -1322,9 +1341,9 @@
 
             // Store memberName and memberEmail in localStorage for use in showAccountSettings
             // (These are currently stored in a Formspree submission, but for client-side display consistency)
-            localStorage.setItem('memberName', memberName);
-            localStorage.setItem('memberEmail', memberEmail);
-            localStorage.setItem('subscriptionPlan', subscriptionPlan);
+            localStorage.setItem('memberName', document.getElementById('memberName').value);
+            localStorage.setItem('memberEmail', document.getElementById('memberEmail').value);
+            localStorage.setItem('subscriptionPlan', document.querySelector('input[name="subscription"]:checked')?.value || 'Not selected');
 
             console.log("Account Settings displayed for:", userZone);
         }
