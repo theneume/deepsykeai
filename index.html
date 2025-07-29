@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deepsyke AI - Hyperpersonalized Search</title>
     <!-- Tailwind CSS CDN -->
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Inter -->
-    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5; /* Light gray background */
+            background-color: #1a1a1a; /* Dark background as per screenshot */
+            color: #e0e0e0; /* Light text color */
         }
         .page-content {
             display: none; /* All pages are hidden by default */
@@ -20,28 +21,37 @@
             display: block; /* Active page is shown */
         }
         .btn-primary {
-            @apply bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
         }
         .btn-secondary {
-            @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-300 ease-in-out;
+            @apply bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-300 ease-in-out;
         }
         .input-field {
-            @apply mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm;
+            @apply mt-1 block w-full px-4 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-800 text-white focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
         }
         .card {
-            @apply bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto my-8;
+            @apply bg-gray-800 p-8 rounded-xl shadow-lg max-w-4xl mx-auto my-8;
+        }
+        .offer-card {
+            @apply bg-gray-700 p-6 rounded-lg shadow-md mb-4;
+        }
+        .offer-link {
+            @apply text-blue-400 hover:text-blue-300 underline;
         }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
     <!-- Main Application Container -->
-    <div class="w-full max-w-6xl bg-white rounded-xl shadow-2xl overflow-hidden">
+    <div class="w-full max-w-6xl bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
 
         <!-- Header (common to all pages) -->
-        <header class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white p-6 text-center rounded-t-xl">
-            <h1 class="text-4xl font-bold mb-2">Deepsyke AI</h1>
-            <p class="text-xl opacity-90">Hyperpersonalized Search Engine</p>
+        <header class="p-6 text-center">
+            <div class="flex flex-col items-center justify-center mb-4">
+                <img src="http://googleusercontent.com/file_content/3" alt="Deepsyke Logo" class="w-24 h-24 mb-4 rounded-full"> <!-- Placeholder image URL -->
+                <h1 class="text-white text-4xl font-bold mb-2">DEEPSYKE</h1>
+            </div>
+            <p class="text-white text-2xl opacity-90">The Hyper-Personalized Search & Opportunity Engine</p>
         </header>
 
         <!-- Page Content Area -->
@@ -49,58 +59,55 @@
 
             <!-- 1. Landing Page -->
             <div id="landing-page" class="page-content active text-center">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6">Unlock Your True Potential with Deepsyke AI</h2>
-                <div class="mb-8">
-                    <!-- Placeholder for video/info -->
-                    <div class="bg-gray-100 rounded-lg p-6 flex items-center justify-center h-64 text-gray-500 border border-dashed border-gray-300">
-                        <p class="text-lg">Placeholder for an introductory video or key information about Deepsyke AI.</p>
-                    </div>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                    <button class="btn-secondary" onclick="showPage('member-ui-page')">Member Area</button>
+                    <button class="btn-secondary" onclick="showPage('business-ui-page')">For Businesses</button>
                 </div>
-                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                    Deepsyke AI is a revolutionary hyperpersonalized search engine that uses advanced affinity zones and phenotypes to deliver tailored suggestions, offers, and insights, connecting you with what truly resonates.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <button class="btn-primary" onclick="showPage('member-signup-page')">Member Sign Up</button>
-                    <button class="btn-primary" onclick="showPage('business-signup-page')">Business Sign Up</button>
+
+                <h2 class="text-2xl font-bold text-white mb-4">Search for Personalized Opportunities</h2>
+                <div class="max-w-xl mx-auto mb-8">
+                    <input type="text" id="landing-search-input" class="input-field" placeholder="What are you looking for? e.g., bum bags for travel">
+                    <button class="btn-primary w-full mt-4" onclick="alert('Search functionality coming soon!')">Search</button>
                 </div>
-                <div class="mt-8 text-sm text-gray-500">
-                    <p>Learn more about our subscription options and how Deepsyke AI can transform your experience.</p>
+
+                <div class="mt-8 text-sm text-gray-400">
+                    <p>Discover a new way to connect with opportunities tailored just for you.</p>
                 </div>
             </div>
 
             <!-- 2. Member Sign-up Page -->
             <div id="member-signup-page" class="page-content">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Member Sign Up</h2>
-                <form class="max-w-xl mx-auto bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Member Sign Up</h2>
+                <form class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg shadow-inner">
                     <div class="mb-4">
-                        <label for="member-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <label for="member-name" class="block text-sm font-medium text-gray-300">Full Name</label>
                         <input type="text" id="member-name" name="member-name" class="input-field" placeholder="John Doe" required>
                     </div>
                     <div class="mb-4">
-                        <label for="member-email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <label for="member-email" class="block text-sm font-medium text-gray-300">Email Address</label>
                         <input type="email" id="member-email" name="member-email" class="input-field" placeholder="john.doe@example.com" required>
                     </div>
                     <div class="mb-4">
-                        <label for="member-dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                        <label for="member-dob" class="block text-sm font-medium text-gray-300">Date of Birth</label>
                         <input type="date" id="member-dob" name="member-dob" class="input-field" required>
                     </div>
                     <div class="mb-4">
-                        <label for="member-location" class="block text-sm font-medium text-gray-700">Location</label>
+                        <label for="member-location" class="block text-sm font-medium text-gray-300">Location</label>
                         <input type="text" id="member-location" name="member-location" class="input-field" placeholder="City, Country" required>
                     </div>
                     <div class="mb-4">
-                        <label for="member-photo" class="block text-sm font-medium text-gray-700">Optional Photo</label>
+                        <label for="member-photo" class="block text-sm font-medium text-gray-300">Optional Photo</label>
                         <input type="file" id="member-photo" name="member-photo" accept="image/*" class="input-field py-1">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">20-Question Survey (Placeholder)</label>
-                        <div class="bg-white p-4 rounded-md border border-gray-200 text-gray-500 text-sm">
+                        <label class="block text-sm font-medium text-gray-300 mb-2">20-Question Survey (Placeholder)</label>
+                        <div class="bg-gray-700 p-4 rounded-md border border-gray-600 text-gray-400 text-sm">
                             <p>This section will contain the 20-question survey to determine natal phenotype and Level of Integration (LOI).</p>
                             <p class="mt-2"><em>(Survey questions and logic to be implemented in a later phase.)</em></p>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <button type="submit" class="btn-primary" onclick="alert('Member registration submitted! (Prototype)')">Submit Registration</button>
+                        <button type="submit" class="btn-primary" onclick="showPage('member-ui-page')">Submit Registration</button>
                         <button type="button" class="btn-secondary" onclick="showPage('landing-page')">Back to Home</button>
                     </div>
                 </form>
@@ -108,38 +115,38 @@
 
             <!-- 3. Business Sign-up Page -->
             <div id="business-signup-page" class="page-content">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Business Sign Up</h2>
-                <form class="max-w-xl mx-auto bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Business Sign Up</h2>
+                <form class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg shadow-inner">
                     <div class="mb-4">
-                        <label for="business-name" class="block text-sm font-medium text-gray-700">Business Name</label>
+                        <label for="business-name" class="block text-sm font-medium text-gray-300">Business Name</label>
                         <input type="text" id="business-name" name="business-name" class="input-field" placeholder="Your Business Name" required>
                     </div>
                     <div class="mb-4">
-                        <label for="business-email" class="block text-sm font-medium text-gray-700">Business Email</label>
+                        <label for="business-email" class="block text-sm font-medium text-gray-300">Business Email</label>
                         <input type="email" id="business-email" name="business-email" class="input-field" placeholder="contact@yourbusiness.com" required>
                     </div>
                     <div class="mb-4">
-                        <label for="business-description" class="block text-sm font-medium text-gray-700">Short Description</label>
+                        <label for="business-description" class="block text-sm font-medium text-gray-300">Short Description</label>
                         <textarea id="business-description" name="business-description" rows="3" class="input-field" placeholder="Tell us about your business..." required></textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="business-deals" class="block text-sm font-medium text-gray-700">Deals/Offers (up to 5)</label>
-                        <textarea id="business-deals" name="business-deals" rows="4" class="input-field" placeholder="e.g., 1. 10% off first purchase (Link: [yoursite.com/deal1)&#10;2](https://yoursite.com/deal1)&#10;2). Free consultation (Link: [yoursite.com/deal2](https://yoursite.com/deal2))"></textarea>
-                        <p class="text-xs text-gray-500 mt-1">Include links to your deals on your website.</p>
+                        <label for="business-deals" class="block text-sm font-medium text-gray-300">Deals/Offers (up to 5)</label>
+                        <textarea id="business-deals" name="business-deals" rows="4" class="input-field" placeholder="e.g., 1. 10% off first purchase (Link: yoursite.com/deal1)&#10;2. Free consultation (Link: yoursite.com/deal2)"></textarea>
+                        <p class="text-xs text-gray-400 mt-1">Include links to your deals on your website.</p>
                     </div>
                     <div class="mb-4">
-                        <label for="business-photo" class="block text-sm font-medium text-gray-700">Business Logo/Photo</label>
+                        <label for="business-photo" class="block text-sm font-medium text-gray-300">Business Logo/Photo</label>
                         <input type="file" id="business-photo" name="business-photo" accept="image/*" class="input-field py-1">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Account & Subscription Details (Placeholder)</label>
-                        <div class="bg-white p-4 rounded-md border border-gray-200 text-gray-500 text-sm">
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Account & Subscription Details (Placeholder)</label>
+                        <div class="bg-gray-700 p-4 rounded-md border border-gray-600 text-gray-400 text-sm">
                             <p>This section will handle account and subscription details.</p>
                             <p class="mt-2"><em>(Payment gateway integration to be implemented in a later phase.)</em></p>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <button type="submit" class="btn-primary" onclick="alert('Business registration submitted! (Prototype)')">Submit Registration</button>
+                        <button type="submit" class="btn-primary" onclick="showPage('business-ui-page')">Submit Registration</button>
                         <button type="button" class="btn-secondary" onclick="showPage('landing-page')">Back to Home</button>
                     </div>
                 </form>
@@ -147,33 +154,34 @@
 
             <!-- 4. Member UI Page -->
             <div id="member-ui-page" class="page-content">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Member Dashboard</h2>
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Member Dashboard</h2>
                 <div class="card">
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Welcome, [Member Name]!</h3>
-                    <p class="text-gray-600 mb-6">Your hyperpersonalized journey begins here.</p>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Welcome, [Member Name]!</h3>
+                    <p class="text-gray-400 mb-6">Your hyperpersonalized journey begins here.</p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <div class="bg-indigo-50 p-5 rounded-lg shadow-sm">
-                            <h4 class="font-medium text-indigo-700 mb-2">Your Profile (Private)</h4>
-                            <p class="text-sm text-gray-600">View and manage your personal details and affinity zone data.</p>
+                        <div class="bg-gray-700 p-5 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-blue-400 mb-2">Your Profile (Private)</h4>
+                            <p class="text-sm text-gray-400">View and manage your personal details and affinity zone data.</p>
                             <button class="btn-secondary mt-3">View Profile</button>
                         </div>
-                        <div class="bg-purple-50 p-5 rounded-lg shadow-sm">
-                            <h4 class="font-medium text-purple-700 mb-2">Account Settings</h4>
-                            <p class="text-sm text-gray-600">Update your subscription, password, and preferences.</p>
+                        <div class="bg-gray-700 p-5 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-purple-400 mb-2">Account Settings</h4>
+                            <p class="text-sm text-gray-400">Update your subscription, password, and preferences.</p>
                             <button class="btn-secondary mt-3">Manage Settings</button>
                         </div>
                     </div>
 
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Actions</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Actions</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <button class="btn-primary" onclick="alert('Search Engine functionality coming soon!')">Use Search Engine</button>
                         <button class="btn-primary" onclick="alert('Feedback form coming soon!')">Give Feedback on Search</button>
-                        <button class="btn-primary" onclick="alert('Browse offers and deals coming soon!')">Browse Offers & Deals</button>
+                        <button class="btn-primary" onclick="showPage('offers-deals-page')">Browse Offers & Deals</button>
                         <button class="btn-primary" onclick="alert('Profile refinement options coming soon!')">Input Entry to Refine Profile</button>
                         <button class="btn-primary" onclick="alert('Past reports and searches coming soon!')">Past Reports & Searches</button>
                         <button class="btn-primary" onclick="showPage('dating-page')">Dating & Networking Match</button>
                     </div>
+
                     <div class="mt-8 text-center">
                         <button class="btn-secondary" onclick="showPage('landing-page')">Back to Home</button>
                     </div>
@@ -182,25 +190,25 @@
 
             <!-- 5. Business UI Page -->
             <div id="business-ui-page" class="page-content">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Business Dashboard</h2>
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Business Dashboard</h2>
                 <div class="card">
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Welcome, [Business Name]!</h3>
-                    <p class="text-gray-600 mb-6">Manage your presence and connect with members.</p>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Welcome, [Business Name]!</h3>
+                    <p class="text-gray-400 mb-6">Manage your presence and connect with members.</p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <div class="bg-green-50 p-5 rounded-lg shadow-sm">
-                            <h4 class="font-medium text-green-700 mb-2">Your Business Profile</h4>
-                            <p class="text-sm text-gray-600">View and edit your business details.</p>
+                        <div class="bg-gray-700 p-5 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-green-400 mb-2">Your Business Profile</h4>
+                            <p class="text-sm text-gray-400">View and edit your business details.</p>
                             <button class="btn-secondary mt-3">Edit Profile</button>
                         </div>
-                        <div class="bg-yellow-50 p-5 rounded-lg shadow-sm">
-                            <h4 class="font-medium text-yellow-700 mb-2">Account Settings</h4>
-                            <p class="text-sm text-gray-600">Manage your subscription and billing.</p>
+                        <div class="bg-gray-700 p-5 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-yellow-400 mb-2">Account Settings</h4>
+                            <p class="text-sm text-gray-400">Manage your subscription and billing.</p>
                             <button class="btn-secondary mt-3">Manage Settings</button>
                         </div>
                     </div>
 
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Actions</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Actions</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <button class="btn-primary" onclick="alert('Business search engine functionality coming soon!')">Use Search Engine</button>
                         <button class="btn-primary" onclick="alert('Searching for visible members coming soon!')">Search for Visible Members</button>
@@ -214,15 +222,15 @@
 
             <!-- 6. Admin UI Page -->
             <div id="admin-ui-page" class="page-content">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Admin Dashboard</h2>
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Admin Dashboard</h2>
                 <div class="card">
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Welcome, Admin!</h3>
-                    <p class="text-gray-600 mb-6">Directly manage and feed the Deepsyke databases.</p>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Welcome, Admin!</h3>
+                    <p class="text-gray-400 mb-6">Directly manage and feed the Deepsyke databases.</p>
 
                     <div class="mb-6">
-                        <label for="admin-feed-input" class="block text-sm font-medium text-gray-700 mb-2">Feed Database (Placeholder)</label>
+                        <label for="admin-feed-input" class="block text-sm font-medium text-gray-300 mb-2">Feed Database (Placeholder)</label>
                         <textarea id="admin-feed-input" rows="8" class="input-field" placeholder="Enter content or commands to feed the databases, e.g., 'add a general statement that is relevant to the SS type', 'add person: John Doe, Type: SS', 'add content: Article on AI, Type: NN'"></textarea>
-                        <p class="text-xs text-gray-500 mt-1">This area is for direct input to the four type-specific databases (content, people, activities, services, etc.).</p>
+                        <p class="text-xs text-gray-400 mt-1">This area is for direct input to the four type-specific databases (content, people, activities, services, etc.).</p>
                     </div>
                     <div class="flex justify-between items-center">
                         <button class="btn-primary" onclick="alert('Admin feed submitted! (Prototype)')">Submit Feed</button>
@@ -233,20 +241,47 @@
 
             <!-- 7. Dating and Networking Match Area -->
             <div id="dating-page" class="page-content">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Dating & Networking Match</h2>
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Dating & Networking Match</h2>
                 <div class="card text-center">
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Find Your Perfect Connection</h3>
-                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Find Your Perfect Connection</h3>
+                    <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
                         This revolutionary approach leverages your Deepsyke profile to help you search for compatible individuals for dating or networking. It's designed to enhance your experience on existing platforms without interfering with them.
                     </p>
-                    <div class="bg-blue-50 p-6 rounded-lg shadow-inner mb-8">
-                        <p class="text-lg text-blue-700 mb-4">Placeholder for personalized search and compatibility tools.</p>
-                        <p class="text-sm text-gray-600">
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-inner mb-8">
+                        <p class="text-lg text-blue-400 mb-4">Placeholder for personalized search and compatibility tools.</p>
+                        <p class="text-sm text-gray-400">
                             When the Deepsyke API is available, this section will integrate with third-party sites (social media, dating apps) to provide personalized search and compatibility insights.
                         </p>
                     </div>
                     <button class="btn-primary mb-4" onclick="alert('Searching for people based on compatibility coming soon!')">Search for Someone</button>
                     <div class="mt-8 text-center">
+                        <button class="btn-secondary" onclick="showPage('member-ui-page')">Back to Member Dashboard</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Page: Offers & Deals (as seen in screenshot) -->
+            <div id="offers-deals-page" class="page-content">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Exclusive Opportunities Just For You</h2>
+                <div class="card">
+                    <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                        Businesses and practitioners in the DEEPSYKE network have tailored these offers to resonate with your unique profile. Explore what awaits!
+                    </p>
+
+                    <div class="offer-card">
+                        <h4 class="text-xl font-semibold text-white mb-2">Zenith Coaching: Visionary Leadership Program</h4>
+                        <p class="text-gray-400 mb-3">"This powerful program is designed for those who lead with passion and seek to manifest bold visions. Their direct, results-oriented style will resonate deeply with your core drive."</p>
+                        <p class="text-blue-400 font-medium">Special Offer: 15% off your first consultation! <a href="#" class="offer-link" onclick="alert('Claim Offer Here clicked!')">Claim Offer Here</a></p>
+                    </div>
+
+                    <div class="offer-card">
+                        <h4 class="text-xl font-semibold text-white mb-2">"The Explorer's Retreat" - Patagonia Adventure</h4>
+                        <p class="text-gray-400 mb-3">"For the soul that craves novelty and intellectual challenge, this curated adventure offers unique insights into uncharted territories. Embrace the thrill of discovery."</p>
+                        <p class="text-blue-400 font-medium">Special Offer: Free gear checklist and planning guide! <a href="#" class="offer-link" onclick="alert('Learn More clicked!')">Learn More</a></p>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <button class="btn-primary mb-4" onclick="alert('Submit Survey & Get Personalized Insights clicked!')">Submit Survey & Get Personalized Insights</button>
                         <button class="btn-secondary" onclick="showPage('member-ui-page')">Back to Member Dashboard</button>
                     </div>
                 </div>
@@ -268,13 +303,6 @@
             // Scroll to top of the page content
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // Add event listeners for navigation from the header (e.g., if we had a common nav)
-        // For now, buttons are directly calling showPage()
-        // Example for future common navigation:
-        // document.getElementById('nav-home').addEventListener('click', () => showPage('landing-page'));
-        // document.getElementById('nav-member-signup').addEventListener('click', () => showPage('member-signup-page'));
-        // ... and so on
     </script>
 </body>
 </html>
