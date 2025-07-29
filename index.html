@@ -766,9 +766,9 @@
                 <h2 class="text-xl text-white font-semibold mb-4">Business Dashboard</h2>
                 <p class="text-gray-300 mb-4">Welcome, Business User! Manage your profile, offers, and member engagement here.</p>
                 <div class="action-buttons">
-                    <button onclick="alert('View/Edit Profile functionality here')">View/Edit My Profile</button>
-                    <button onclick="alert('Manage Offers functionality here')">Manage My Offers</button>
-                    <button onclick="alert('View Member Feedback functionality here')">View Member Feedback</button>
+                    <button onclick="handleBusinessAction('View/Edit Profile')">View/Edit My Profile</button>
+                    <button onclick="handleBusinessAction('Manage Offers')">Manage My Offers</button>
+                    <button onclick="handleBusinessAction('View Member Feedback')">View Member Feedback</button>
                 </div>
             </div>
 
@@ -776,10 +776,10 @@
                 <h2 class="text-xl text-white font-semibold mb-4">Admin Control Panel</h2>
                 <p class="text-gray-300 mb-4">Welcome, Admin! Manage members, businesses, and system data.</p>
                 <div class="action-buttons">
-                    <button onclick="alert('Manage Members functionality here')">Manage Members</button>
-                    <button onclick="alert('Manage Businesses functionality here')">Manage Businesses</button>
-                    <button onclick="alert('View Analytics functionality here')">View Analytics</button>
-                    <button onclick="alert('Feed Database functionality here')">Feed Database</button>
+                    <button onclick="handleAdminAction('Manage Members')">Manage Members</button>
+                    <button onclick="handleAdminAction('Manage Businesses')">Manage Businesses</button>
+                    <button onclick="handleAdminAction('View Analytics')">View Analytics</button>
+                    <button onclick="handleAdminAction('Feed Database')">Feed Database</button>
                 </div>
             </div>
         </div>
@@ -993,8 +993,14 @@
                         <p class="text-gray-400 mt-4">You can now explore your personalized sections.</p>
                     `;
                     setSurveyCompleted(userAffinityZone); // Mark survey as completed and store zone
+                    
+                    // Store memberName, memberEmail, subscriptionPlan in localStorage for Account Settings
+                    localStorage.setItem('memberName', memberName);
+                    localStorage.setItem('memberEmail', memberEmail);
+                    localStorage.setItem('subscriptionPlan', subscriptionPlan);
+
                     form.reset(); // Resets all form fields
-                    showMemberUIPage(); // **FIXED: Transition to Member UI after successful submission**
+                    showMemberUIPage(); // Transition to Member UI after successful submission
                 } else {
                     const errorData = await response.json();
                     resultsOutput.innerHTML = `<p class="text-red-400">Error submitting survey: ${errorData.errors ? errorData.errors.map(e => e.message).join(', ') : 'Unknown error'}</p>`;
@@ -1070,6 +1076,19 @@
             }
         });
 
+        // Handler for Business UI action buttons
+        function handleBusinessAction(action) {
+            const resultsOutput = document.getElementById('resultsOutput');
+            resultsOutput.innerHTML = `<p class="text-blue-300">Simulating: ${action} functionality. This is where your business data management features would appear.</p>`;
+            console.log(`Business user clicked: ${action}`);
+        }
+
+        // Handler for Admin UI action buttons
+        function handleAdminAction(action) {
+            const resultsOutput = document.getElementById('resultsOutput');
+            resultsOutput.innerHTML = `<p class="text-blue-300">Simulating: ${action} functionality. This is where your admin tools and system insights would appear.</p>`;
+            console.log(`Admin user clicked: ${action}`);
+        }
 
         function performMemberSearch() {
             const query = document.getElementById('memberSearchQueryUI').value;
@@ -1331,21 +1350,22 @@
                 </div>
                 <h4 class="text-lg text-white font-semibold mt-4 mb-3">Actions:</h4>
                 <ul class="list-disc list-inside text-gray-300 mb-4">
-                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to update profile details goes here.')">Update Profile Details</a></li>
-                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to change password goes here.')">Change Password</a></li>
-                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to upgrade/downgrade membership goes here.')">Manage Membership Plan</a></li>
-                    <li><a href="#" class="text-blue-400 hover:underline" onclick="localStorage.clear(); showMemberSignupPage(); alert('Your data has been cleared. You are logged out.');">Clear Data & Log Out (For Testing)</a></li>
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="handleAccountAction('Update Profile Details')">Update Profile Details</a></li>
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="handleAccountAction('Change Password')">Change Password</a></li>
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="handleAccountAction('Manage Membership Plan')">Manage Membership Plan</a></li>
+                    <li><a href="#" class="text-blue-400 hover:underline" onclick="localStorage.clear(); showMemberSignupPage();">Clear Data & Log Out (For Testing)</a></li>
                 </ul>
                 <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>
             `;
 
-            // Store memberName and memberEmail in localStorage for use in showAccountSettings
-            // (These are currently stored in a Formspree submission, but for client-side display consistency)
-            localStorage.setItem('memberName', document.getElementById('memberName').value);
-            localStorage.setItem('memberEmail', document.getElementById('memberEmail').value);
-            localStorage.setItem('subscriptionPlan', document.querySelector('input[name="subscription"]:checked')?.value || 'Not selected');
-
             console.log("Account Settings displayed for:", userZone);
+        }
+
+        // Handler for Account Settings action buttons (new)
+        function handleAccountAction(action) {
+            const resultsOutput = document.getElementById('resultsOutput');
+            resultsOutput.innerHTML = `<p class="text-blue-300">Simulating: ${action} functionality. This is where you'd manage your account specifics.</p>`;
+            console.log(`Member user clicked: ${action}`);
         }
 
     </script>
