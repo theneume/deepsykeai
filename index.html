@@ -45,7 +45,8 @@
             padding-bottom: 20px;
             border-bottom: 1px solid #2a2a2a;
         }
-        .logo-svg {
+        /* Updated style for the new image logo */
+        .logo-img {
             width: 80px; /* Adjust size as needed */
             height: 80px;
             display: block;
@@ -54,6 +55,7 @@
             border-radius: 50%; /* Make it round */
             box-shadow: 0 0 25px rgba(99, 102, 241, 0.5); /* Matching glow */
             transition: all 0.3s ease;
+            object-fit: cover; /* Ensure the image covers the area without distortion */
         }
         .logo-text {
             font-size: 1.8em; /* Slightly larger for impact */
@@ -333,23 +335,7 @@
 <body>
     <div class="container">
         <div class="logo-container">
-            <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#87ceeb;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#b0c4de;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#87ceeb;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <circle cx="50" cy="50" r="15" fill="url(#grad2)"/>
-                <path d="M50 5C74.8528 5 95 25.1472 95 50C95 74.8528 74.8528 95 50 95C25.1472 95 5 74.8528 5 50C5 25.1472 25.1472 5 50 5Z" stroke="url(#grad1)" stroke-width="3" opacity="0.7"/>
-                <path d="M50 15C69.33 15 85 30.67 85 50C85 69.33 69.33 85 50 85C30.67 85 15 69.33 15 50C15 30.67 30.67 15 50 15Z" stroke="url(#grad2)" stroke-width="2" opacity="0.5"/>
-                <line x1="50" y1="50" x2="70" y2="30" stroke="#b0c4de" stroke-width="1" opacity="0.6"/>
-                <line x1="50" y1="50" x2="30" y2="70" stroke="#b0c4de" stroke-width="1" opacity="0.6"/>
-            </svg>
+            <img src="https://raw.githubusercontent.com/deepsykeai/images/main/logo1.png" alt="DEEPSYKE Logo" class="logo-img">
             <div class="logo-text">DEEPSYKE</div>
         </div>
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-wide mb-8">The Hyper-Personalized Search & Opportunity Engine</h1>
@@ -598,7 +584,7 @@
                                 <label for="q11b">b) A well-arranged space that allows for a good mix of work and free time. I value efficiency and a smooth flow in my daily life.</label>
                             </div>
                             <div class="option">
-                                <input type="radio" id="q11c" name="q11_personal_space" value="DS">
+                                <input type="radio" id="q11c" name="q11_personal_space" value="DS" required>
                                 <label for="q11c">c) An energetic and exciting environment that sparks my creativity and desire to explore. I thrive on newness and a constantly changing scene.</label>
                             </div>
                             <div class="option">
@@ -788,16 +774,16 @@
                     </div>
 
                     <div class="subscription-options">
-                            <h3 class="text-lg text-white font-semibold mb-3">Choose Your Membership:</h3>
-                            <div class="subscription-option">
-                                <input type="radio" id="subBasic" name="subscription" value="basic" required>
-                                <label for="subBasic">$19.95 / month (30 searches/reports)</label>
-                            </div>
-                            <div class="subscription-option">
-                                <input type="radio" id="subPremium" name="subscription" value="premium">
-                                <label for="subPremium">$59.95 / month (Unlimited searches/reports/offers)</label>
-                            </div>
-                            <button type="submit" id="memberSurveySubmitBtn" class="btn-primary">Proceed to Payment (Placeholder)</button>
+                                <h3 class="text-lg text-white font-semibold mb-3">Choose Your Membership:</h3>
+                                <div class="subscription-option">
+                                    <input type="radio" id="subBasic" name="subscription" value="basic" required>
+                                    <label for="subBasic">$19.95 / month (30 searches/reports)</label>
+                                </div>
+                                <div class="subscription-option">
+                                    <input type="radio" id="subPremium" name="subscription" value="premium">
+                                    <label for="subPremium">$59.95 / month (Unlimited searches/reports/offers)</label>
+                                </div>
+                                <button type="submit" id="memberSurveySubmitBtn" class="btn-primary">Proceed to Payment (Placeholder)</button>
                     </div>
                 </form>
             </div>
@@ -867,6 +853,7 @@
                     <button class="btn-secondary w-full sm:w-auto flex-grow" onclick="alert('View/Edit Profile functionality here')">View/Edit My Profile</button>
                     <button class="btn-secondary w-full sm:w-auto flex-grow" onclick="alert('Manage Offers functionality here')">Manage My Offers</button>
                     <button class="btn-secondary w-full sm:w-auto flex-grow" onclick="alert('View Member Feedback functionality here')">View Member Feedback</button>
+                    <button class="btn-secondary w-full sm:w-auto flex-grow" onclick="alert('Feed Database functionality here')">Feed Database</button>
                 </div>
                 <button onclick="showHomePage()" class="btn-secondary mt-4">Back to Home</button>
             </div>
@@ -1174,7 +1161,7 @@
             const serviceDescription = document.getElementById('serviceDescription').value;
             const specialOffer = document.getElementById('specialOffer').value;
             const selectedAffinityZones = Array.from(document.querySelectorAll('#businessProfileForm .affinity-checkboxes input[type="checkbox"]:checked'))
-                                                     .map(cb => cb.value);
+                                                       .map(cb => cb.value);
 
             if (!businessName.trim() || !serviceDescription.trim() || selectedAffinityZones.length === 0) {
                 resultsOutput.innerHTML = '<p class="text-red-400">Please fill in business name, service description, and select at least one Associated Affinity Zone.</p>';
@@ -1310,19 +1297,19 @@
                         <p class="text-lg text-blue-300 font-medium">Your SS Report: The Grounded Processor's Inner World</p>
                         <p class="text-sm text-gray-300">"You are deeply reflective, valuing security and profound understanding. Your strength lies in your ability to process information thoroughly and connect with authentic truths. Your path to wholeness involves embracing gentle novelty and expressing your deep insights to the world."</p>
                         <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for SS:</h4>
-                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Consciously introduce small, manageable new experiences to stimulate your dopamine.</li>\n                            <li>Practice direct, concise communication to share your insights without overthinking.</li>\n                            <li>Set healthy boundaries to protect your need for peace and reflection.</li>\n                        </ul>\n                    `;
+                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Consciously introduce small, manageable new experiences to stimulate your dopamine.</li>\n                            <li>Practice direct, concise communication to share your insights without overthinking.</li>\n                            <li>Set healthy boundaries to protect your need for peace and reflection.</li>\n                        </ul>\n                    `;
                     break;
                 case 'SD':
-                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your SD Report: The Strategic Navigator's Balanced Journey</p>\n                        <p class="text-sm text-gray-300">"You are a master of balance, blending practicality with a desire for harmony. Your strength is your ability to strategize effectively and foster strong, collaborative relationships. Your path to wholeness involves asserting your needs and embracing spontaneous vulnerability."</p>\n                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for SD:</h4>\n                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Dare to step outside your comfort zone of harmony and engage in healthy conflict when necessary.</li>\n                            <li>Prioritize self-care to avoid martyrdom or burnout from helping others.</li>\n                            <li>Embrace imperfection and allow for less controlled, more raw emotional expression.</li>\n                        </ul>\n                    `;
+                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your SD Report: The Strategic Navigator's Balanced Journey</p>\n                        <p class="text-sm text-gray-300">"You are a master of balance, blending practicality with a desire for harmony. Your strength is your ability to strategize effectively and foster strong, collaborative relationships. Your path to wholeness involves asserting your needs and embracing spontaneous vulnerability."</p>\n                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for SD:</h4>\n                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Dare to step outside your comfort zone of harmony and engage in healthy conflict when necessary.</li>\n                            <li>Prioritize self-care to avoid martyrdom or burnout from helping others.</li>\n                            <li>Embrace imperfection and allow for less controlled, more raw emotional expression.</li>\n                        </ul>\n                    `;
                     break;
                 case 'DS':
-                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your DS Report: The Exploratory Innovator's Vibrant Mind</p>\n                        <p class="text-sm text-gray-300">"You are a wellspring of ideas, driven by curiosity and a love for novelty. Your charisma and intellectual agility are your superpowers. Your path to wholeness involves cultivating grounding, structure, and focusing on completing your many brilliant initiatives."</p>\n                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for DS:</h4>\n                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Practice intentional pausing to allow for deeper emotional processing and reduce scattered energy.</li>\n                            <li>Prioritize completion over constant initiation; choose a few projects to finish.</li>\n                            <li>Seek grounding activities like nature walks or mindful routines to balance your mental dynamism.</li>\n                        </ul>\n                    `;
+                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your DS Report: The Exploratory Innovator's Vibrant Mind</p>\n                        <p class="text-sm text-gray-300">"You are a wellspring of ideas, driven by curiosity and a love for novelty. Your charisma and intellectual agility are your superpowers. Your path to wholeness involves cultivating grounding, structure, and focusing on completing your many brilliant initiatives."</p>\n                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for DS:</h4>\n                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Practice intentional pausing to allow for deeper emotional processing and reduce scattered energy.</li>\n                            <li>Prioritize completion over constant initiation; choose a few projects to finish.</li>\n                            <li>Seek grounding activities like nature walks or mindful routines to balance your mental dynamism.</li>\n                        </ul>\n                    `;
                     break;
                 case 'DD':
-                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your DD Report: The Dynamic Initiator's Relentless Drive</p>\n                        <p class="text-sm text-gray-300">"You are a force of nature, driven by achievement and clear results. Your confidence and ability to lead are undeniable. Your path to wholeness involves consciously inviting stillness, patience, and cultivating emotional nuance."</p>\n                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for DD:</h4>\n                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Practice active listening and empathy, valuing emotional expressions even if they lack "logic."</li>\n                            <li>Consciously slow your pace and create moments of quiet reflection.</li>\n                            <li>Learn to trust in others' capabilities, allowing for shared decision-making without needing to control every detail.</li>\n                        </ul>\n                    `;
+                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your DD Report: The Dynamic Initiator's Relentless Drive</p>\n                        <p class="text-sm text-gray-300">"You are a force of nature, driven by achievement and clear results. Your confidence and ability to lead are undeniable. Your path to wholeness involves consciously inviting stillness, patience, and cultivating emotional nuance."</p>\n                        <h4 class="text-lg text-white font-semibold mt-4 mb-3">Growth Areas for DD:</h4>\n                        <ul class="list-disc list-inside text-gray-300 mb-4">\n                            <li>Practice active listening and empathy, valuing emotional expressions even if they lack "logic."</li>\n                            <li>Consciously slow your pace and create moments of quiet reflection.</li>\n                            <li>Learn to trust in others' capabilities, allowing for shared decision-making without needing to control every detail.</li>\n                        </ul>\n                    `;
                     break;
                 default:
-                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your Personalized Report</p>\n                        <p class="text-sm text-gray-300">"Complete the Member Signup Survey to unlock your unique Affinity Zone report and discover tailored insights for your personal growth!"</p>\n                    `;
+                    reportContent = `\n                        <p class="text-lg text-blue-300 font-medium">Your Personalized Report</p>\n                        <p class="text-sm text-gray-300">"Complete the Member Signup Survey to unlock your unique Affinity Zone report and discover tailored insights for your personal growth!"</p>\n                    `;
                     break;
             }
 
@@ -1433,7 +1420,7 @@
                     <p class="text-sm text-gray-300">Membership Plan: ${subscriptionPlan.charAt(0).toUpperCase() + subscriptionPlan.slice(1)}</p>
                 </div>
                 <h4 class="text-lg text-white font-semibold mt-4 mb-3">Actions:</h4>
-                <ul class="list-disc list-inside text-gray-300 mb-4">\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to update profile details goes here.')">Update Profile Details</a></li>\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to change password goes here.')">Change Password</a></li>\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to upgrade/downgrade membership goes here.')">Manage Membership Plan</a></li>\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="localStorage.clear(); showHomePage(); alert('Your data has been cleared. You are logged out.');">Clear Data & Log Out (For Testing)</a></li>\n                </ul>\n                <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>\n            `;
+                <ul class="list-disc list-inside text-gray-300 mb-4">\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to update profile details goes here.')">Update Profile Details</a></li>\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to change password goes here.')">Change Password</a></li>\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="alert('Functionality to upgrade/downgrade membership goes here.')">Manage Membership Plan</a></li>\n                    <li><a href="#" class="text-blue-400 hover:underline" onclick="localStorage.clear(); showHomePage(); alert('Your data has been cleared. You are logged out.');">Clear Data & Log Out (For Testing)</a></li>\n                </ul>\n                <p class="text-gray-400 mt-4">Feedback: <a href="#" class="text-blue-400 hover:underline">Was this helpful?</a></p>\n            `;
 
             console.log("Account Settings displayed for:", userZone);
         }
