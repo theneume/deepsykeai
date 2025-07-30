@@ -212,7 +212,7 @@
             box-shadow: inset 0 0 10px rgba(135, 206, 235, 0.1);
         }
         .hidden {
-            display: none;
+            display: none !important; /* Use !important to ensure override */
         }
         .checkbox-group {
             display: flex;
@@ -925,12 +925,12 @@
             pages.forEach(id => {
                 const pageElement = document.getElementById(id);
                 if (pageElement) {
-                    pageElement.classList.add('hidden');
+                    pageElement.classList.add('hidden'); // Ensure all are hidden
                 }
             });
             const selectedPageElement = document.getElementById(pageId);
             if (selectedPageElement) {
-                selectedPageElement.classList.remove('hidden');
+                selectedPageElement.classList.remove('hidden'); // Show the selected one
             }
             // Clear results area on page switch, unless it's the member UI search results
             if (pageId !== 'memberUIPage' && pageId !== 'offersDealsPage' && pageId !== 'datingNetworkingPage') {
@@ -1006,11 +1006,7 @@
 
         // Initial UI setup on page load
         window.onload = () => {
-            if (checkSurveyStatus()) {
-                showMemberUIPage(); // If survey completed, go straight to member UI
-            } else {
-                showHomePage(); // Otherwise, start at the new home page
-            }
+            showHomePage(); // Always start at the home page
         };
 
         // --- Core Affinity Zone Calculation Logic ---
