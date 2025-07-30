@@ -211,6 +211,7 @@
             padding: 20px;
             box-shadow: inset 0 0 10px rgba(135, 206, 235, 0.1);
         }
+        /* Crucial change here */
         .hidden {
             display: none !important; /* Use !important to ensure override */
         }
@@ -293,6 +294,8 @@
         #homePage {
             text-align: center;
             padding: 20px 0;
+            /* Make sure this section is visible by default or when JavaScript sets it */
+            display: block; /* This will be overridden by .hidden if present */
         }
         #homePage h2 {
             font-size: 2.2em;
@@ -925,7 +928,7 @@
             pages.forEach(id => {
                 const pageElement = document.getElementById(id);
                 if (pageElement) {
-                    pageElement.classList.add('hidden'); // Ensure all are hidden
+                    pageElement.classList.add('hidden'); // Ensure all are hidden using the !important rule
                 }
             });
             const selectedPageElement = document.getElementById(pageId);
